@@ -89,12 +89,24 @@
             --c-ink: #02060C;
         }
 
+        /* FIX: Applied global overflow-x-hidden to html to prevent horizontal scroll 
+           caused by decorative background elements.
+        */
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--c-cream);
             color: var(--c-ink);
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 120px; 
+            /* FIX: Removed padding-bottom: 120px to eliminate the white gap below footer. 
+               Spacing is now handled inside the footer. */
+            padding-bottom: 0; 
+            overflow-x: hidden;
+            width: 100%;
         }
 
         h1, h2, h3, .font-heading {
@@ -130,9 +142,9 @@
     </style>
 </head>
 
-<body class="antialiased text-ink font-body overflow-x-hidden" onclick="handleBodyClick(event)">
+<body class="antialiased text-ink font-body" onclick="handleBodyClick(event)">
 
-    <div id="view-home" class="transition-opacity duration-300">
+    <div id="view-home" class="transition-opacity duration-300 w-full">
         
         <!-- HEADER: Liquid Glass Effect on Scroll -->
         <header id="main-header" class="sticky top-0 z-40 bg-[#FFF0EB] pt-2 pb-2 transition-all duration-300 border-b border-transparent">
@@ -196,7 +208,7 @@
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 pb-20">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             
             <!-- HERO SECTION -->
             <section class="pt-6 pb-2 md:pt-12 md:pb-8 relative">
@@ -299,8 +311,42 @@
             </section>
         </main>
 
+        <!-- REIMAGINED FOOTER -->
+        <!-- FIX: Added pb-28 md:pb-32 to footer to provide space for floating elements 
+             while maintaining background continuity. Replaces body padding. -->
+        <footer class="relative pt-20 pb-28 md:pb-32 overflow-hidden">
+            <!-- Smooth Gradient Background: Matched Hero Logic (Inverted) & Enhanced for Smoothness -->
+            <!-- Matched hero logic: Inverted top/bottom classes, removed 'mt-10' to close gap, smooth gradient to transparent -->
+            <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[150%] h-[140%] bg-gradient-to-t from-[#FFF0EB] to-transparent -z-10 rounded-t-[50%] opacity-100"></div>
+            
+            <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+                <!-- Main Headline -->
+                <h2 class="text-4xl md:text-6xl font-extrabold text-ink font-heading tracking-tight mb-6 leading-[1.1]">
+                    Your meal,<br class="md:hidden"> <span class="text-primary-rust">done right.</span>
+                </h2>
+                
+                <!-- Subheadline -->
+                <p class="text-earth text-base md:text-lg font-medium mb-8 font-body max-w-sm md:max-w-lg mx-auto leading-relaxed">
+                    Cooked fresh in our kitchen and delivered straight to your door in minutes.
+                </p>
+                
+                <!-- CTA Button -->
+                <button onclick="window.scrollTo({top:0, behavior:'smooth'}); document.getElementById('search-input-hero').focus();" 
+                    class="bg-primary-rust hover:bg-primary-dark text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-orange-500/20 hover:shadow-orange-500/30 active:scale-95 transition-all duration-200 font-heading inline-flex items-center gap-2 group">
+                    Order Now
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-[24px]">arrow_forward</span>
+                </button>
+                
+                <!-- Brand Anchor -->
+                <div class="mt-12 mb-4 select-none opacity-20">
+                    <span class="zwigato-logo text-6xl md:text-8xl text-ink tracking-tighter">Zwigato.</span>
+                </div>
+                 <p class="text-[10px] text-earth/60 font-bold tracking-[0.2em] uppercase">© 2026 Zwigato. All rights reserved.</p>
+            </div>
+        </footer>
+
         <!-- CART FLOATING BAR -->
-        <div id="cart-bar" style="transform: translateY(200%)" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 transition-transform duration-300 ease-out">
+        <div id="cart-bar" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 transition-transform duration-300 ease-out translate-y-[200%]">
             <div onclick="showCart()"
                 class="bg-[#60b246] hover:bg-[#539e3d] text-white p-3 px-5 rounded-xl shadow-float flex items-center justify-between cursor-pointer group active:scale-[0.99] transition-all">
                 
