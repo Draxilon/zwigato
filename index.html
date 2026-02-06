@@ -134,20 +134,33 @@
 
     <div id="view-home" class="transition-opacity duration-300">
         
-        <!-- HEADER: Blended with Hero (Solid color matching hero top) -->
-        <header class="sticky top-0 z-40 bg-[#FFF0EB] pt-2 pb-2 transition-all duration-300">
+        <!-- HEADER: Liquid Glass Effect on Scroll -->
+        <header id="main-header" class="sticky top-0 z-40 bg-[#FFF0EB] pt-2 pb-2 transition-all duration-300 border-b border-transparent">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-14">
                     
-                    <!-- Left: Logo & Location Hint -->
-                    <div class="flex items-center gap-4">
+                    <!-- Left: Logo & Location Stack -->
+                    <div class="flex flex-col items-start -space-y-0.5">
                         <div class="zwigato-logo text-2xl text-ink leading-normal cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
                             Zwigato<span class="text-primary-rust">.</span>
                         </div>
-                        <div class="hidden md:flex items-center gap-1 text-xs font-bold text-earth/70 bg-white/50 px-3 py-1 rounded-full">
-                            <span class="material-symbols-outlined text-[14px]">location_on</span>
-                            <span>Lucknow, India</span>
-                            <span class="material-symbols-outlined text-[14px]">expand_more</span>
+                        
+                        <!-- Location Dropdown -->
+                        <div class="relative z-[60]">
+                            <button onclick="toggleLocationDropdown(event)" id="location-trigger" class="flex items-center gap-0.5 group cursor-pointer active:scale-95 transition-transform">
+                                <span id="current-location" class="text-[11px] font-bold text-earth group-hover:text-primary-rust transition-colors">Lucknow, India</span>
+                                <span id="location-chevron" class="material-symbols-outlined text-[14px] text-earth group-hover:text-primary-rust transition-colors transition-transform duration-200">expand_more</span>
+                            </button>
+
+                            <div id="location-dropdown" class="absolute top-full left-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 hidden origin-top-left overflow-hidden">
+                                <div class="p-1">
+                                    <div class="px-3 py-2 text-[10px] uppercase font-bold text-gray-400 tracking-widest border-b border-gray-50 mb-1">Select Branch</div>
+                                    <button onclick="updateLocation('Lucknow, India')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Lucknow, India</button>
+                                    <button onclick="updateLocation('Indira Nagar')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Indira Nagar</button>
+                                    <button onclick="updateLocation('Gomti Nagar')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Gomti Nagar</button>
+                                    <button onclick="updateLocation('Hazratganj')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Hazratganj</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -185,9 +198,8 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 pb-20">
             
-            <!-- HERO SECTION: Unified block with Header -->
+            <!-- HERO SECTION -->
             <section class="pt-6 pb-2 md:pt-12 md:pb-8 relative">
-                <!-- Background decorative element extended to match header -->
                 <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[150%] h-[140%] bg-gradient-to-b from-[#FFF0EB] to-transparent -z-10 rounded-b-[50%] opacity-100"></div>
 
                 <div class="flex flex-col items-center text-center max-w-2xl mx-auto">
@@ -225,43 +237,45 @@
                 </div>
             </section>
 
-            <!-- CATEGORY NAV: The Primary Navigation -->
+            <!-- CATEGORY NAV: Primary Color Update -->
             <div id="category-nav" class="py-4 -mx-4 px-4 sm:mx-0 sm:px-0">
                 <div class="flex gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 px-1 justify-start md:justify-center">
                     
                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform active-tab" data-category="all">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink group-[.active-tab]:shadow-lg flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                        <!-- Replaced active bg-ink with bg-primary-rust -->
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
                              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ45_EUYaZRXGCEjhoy96GfQ-qWNEHyhlw-lJ2SbWTty4i_tGRZpIHqnQWH-NpqwnV1RcFleCn_MZxX_0XPLQJd_AlPx9CpxFxazNm6-G1RttAruvA9mAv94vx7kvYcG-YMiOFkBCNtHJjDIo5U0aXT64xlpgenCGtfusvJSb9kFSIzw1cZvPhYpC_a8u50e3xP6X5hHXzcn5BOMKYMDFa0xzj6dY_dq8BGxuBdLy-XJFO7BhmQKo2hG5UKaYeFGCMc-3CVhylLgU" class="w-full h-full object-cover rounded-full opacity-90 group-[.active-tab]:opacity-100">
                         </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">All Items</span>
+                        <!-- Replaced active text-ink with text-primary-rust -->
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">All Items</span>
                     </button>
 
                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="rolls">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu4XtsPQVQmzt-oply8j5oOkLj49rQG2-Cd5sczoIoNTc099N2jy-G0avyqsFxa4oBx39r79JppJNpVccRit4LN8fO7YQCZnyU-tBxq4qxhRjjTBpRO_-ht-uEUNTanAikYyK1gX2bwVsHyEZoqwDqt3GIOPXgQdqr2fchUMIsFN9bHTdpDO5TWwSTwQhKUb2TUgNDt1QTeR8llO5TTr9XROLj2q_B5YYOQozYQBD8Vh_i24B2PLpIo2vIAHowK5BtsIP4oFdgv90" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Rolls</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Rolls</span>
                     </button>
 
                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="kebabs">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiEJd-nNkflydn5dWe2apbwEymsC7rdQ6Na4dNwBSDpat12CGtLFsje0TmgRCMKb2nwWXZzj9e3DPiiU-LU9a5tlReR3GsLPEKvN1lMrLwXpCOpQT-o2h6hqBP0xbDJ3snj6Q6g7dbLXo9wOpQjJmHzAjaeGbNcvyzmzz_D6vNPCXjbKne7G_CG0vXu9MFlEGTYP6RYWTjrEFhNmzmaIDXpnXOYCYM20VNTMZqmnEXKlnKrnpq6oSJWSf0bZITCxUGKLyIi7S7x9E" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Kebabs</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Kebabs</span>
                     </button>
 
                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="biryani">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Biryani</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Biryani</span>
                     </button>
 
                      <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="desserts">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JtH1VdyHqTowcQPBewPtHmnFJhsS6uXEUwIs6lDj6fLXl4NdwMOTqgpTxIiysk5eKnVO0ohjXPHO1wTGz-ZaINTgX-dr4Wis2ZTIfGJY7KJNCD7OaRN70RJJdFkeoVWgG3ZYoE4zxYUNdE38fh8-a7n9gPFjmLioLVw-v7-Q85qeJT_LHQkqklbMQqfs9tYlcONPcTWwvvIosMQI8IpQ0qTZCUrT4ipQWhnKUU0ggb5za4KlDK-GDMlM9HqpWHez_BBwP8Z_8-8" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Desserts</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Desserts</span>
                     </button>
                 </div>
             </div>
@@ -668,9 +682,47 @@
             setupCategoryFilters();
             updateModeSelectorUI();
             syncFilterUI();
+            setupHeaderScroll();
         });
 
         // --- 6. CORE FUNCTIONS ---
+
+        // NEW: Scroll Glass Effect
+        function setupHeaderScroll() {
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-gray-100/50');
+                    header.classList.remove('bg-[#FFF0EB]', 'border-transparent');
+                } else {
+                    header.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-gray-100/50');
+                    header.classList.add('bg-[#FFF0EB]', 'border-transparent');
+                }
+            });
+        }
+
+        // NEW: Location Dropdown Logic
+        function toggleLocationDropdown(event) {
+            if(event) event.stopPropagation();
+            const dropdown = document.getElementById('location-dropdown');
+            const chevron = document.getElementById('location-chevron');
+            
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                dropdown.classList.add('animate-dropdown-enter');
+                chevron.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                dropdown.classList.remove('animate-dropdown-enter');
+                chevron.classList.remove('rotate-180');
+            }
+        }
+
+        function updateLocation(newLocation) {
+            document.getElementById('current-location').innerText = newLocation;
+            document.getElementById('location-dropdown').classList.add('hidden');
+            document.getElementById('location-chevron').classList.remove('rotate-180');
+        }
 
         function renderMenu() {
             menuContainer.innerHTML = '';
@@ -898,6 +950,14 @@
             if (dropdown && !dropdown.classList.contains('hidden') && !trigger.contains(event.target) && !dropdown.contains(event.target)) {
                  dropdown.classList.add('hidden');
                  document.getElementById('trigger-chevron').classList.remove('rotate-180');
+            }
+
+            // Close Location Dropdown
+            const locDropdown = document.getElementById('location-dropdown');
+            const locTrigger = document.getElementById('location-trigger');
+            if (locDropdown && !locDropdown.classList.contains('hidden') && !locTrigger.contains(event.target) && !locDropdown.contains(event.target)) {
+                 locDropdown.classList.add('hidden');
+                 document.getElementById('location-chevron').classList.remove('rotate-180');
             }
         }
 
