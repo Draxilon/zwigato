@@ -18,7 +18,7 @@
                         'primary-dark': '#E64A00',
                         'paper': '#FFFFFF',
                         'ink': '#02060C',
-                        'cream': '#F0F0F5',
+                        'cream': '#F9F9FB', // Slightly lighter for modern look
                         'gold': '#E2E3E7',
                         'earth': '#5B5F65',
                         'success': '#34C759',
@@ -31,13 +31,14 @@
                     },
                     borderRadius: {
                         'xl': '12px',
-                        '2xl': '16px',
+                        '2xl': '20px', // More rounded as per inspo
                         '3xl': '24px',
-                        'pill': '999px', // Added pill radius
+                        'pill': '999px',
                     },
                     boxShadow: {
-                        'soft': '0 4px 12px rgba(0,0,0,0.05)',
-                        'hover': '0 8px 24px rgba(0,0,0,0.1)'
+                        'soft': '0 8px 24px rgba(0,0,0,0.04)',
+                        'hover': '0 12px 32px rgba(0,0,0,0.08)',
+                        'nav': '0 -4px 20px rgba(0,0,0,0.03)'
                     },
                     animation: {
                         'dropdown-enter': 'dropdownEnter 0.2s ease-out forwards',
@@ -76,12 +77,10 @@
 
     <style>
         :root {
-            --c-cream: #F0F0F5;
+            --c-cream: #F9F9FB;
             --c-paper: #FFFFFF;
             --c-rust: #FF5200;
-            --c-gold: #E2E3E7;
             --c-ink: #02060C;
-            --c-earth: #5B5F65;
         }
 
         body {
@@ -89,6 +88,8 @@
             background-color: var(--c-cream);
             color: var(--c-ink);
             -webkit-font-smoothing: antialiased;
+            /* Extra padding bottom for bottom nav */
+            padding-bottom: 120px; 
         }
 
         h1, h2, h3, .font-heading {
@@ -104,128 +105,67 @@
             scrollbar-width: none;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .animate-slideUp {
-            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .material-symbols-outlined.filled {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        
         .zwigato-logo {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
             letter-spacing: -0.03em;
             font-style: italic;
         }
-        
-        .hero-gradient {
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+
+        .filled-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        .dropdown-scroll::-webkit-scrollbar {
-            width: 4px;
-        }
-        .dropdown-scroll::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .dropdown-scroll::-webkit-scrollbar-thumb {
-            background-color: #E2E3E7;
-            border-radius: 20px;
+        /* Specific fix for the nav bar shadow to look seamless */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
 
-<body class="antialiased pb-24 bg-cream text-ink font-body overflow-x-hidden" onclick="handleBodyClick(event)">
+<body class="antialiased text-ink font-body overflow-x-hidden" onclick="handleBodyClick(event)">
 
     <div id="view-home" class="transition-opacity duration-300">
-        <header class="relative md:sticky md:top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-[0_2px_15px_rgba(0,0,0,0.03)] transition-all duration-300">
+        
+        <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md pt-2 pb-2 transition-all duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16 gap-4">
+                <div class="flex items-center justify-between h-14">
                     
                     <div class="flex items-center shrink-0">
-                        <div class="h-10 w-auto flex items-center">
-                            <div class="zwigato-logo text-2xl sm:text-3xl text-primary-rust pb-1 leading-normal cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                                Zwigato
-                            </div>
+                        <div class="zwigato-logo text-2xl text-ink leading-normal cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                            Zwigato<span class="text-primary-rust">.</span>
                         </div>
                     </div>
 
-                    <div class="hidden md:flex flex-1 max-w-xl mx-auto gap-3 items-center">
-                        <div class="relative flex-1 group">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined group-focus-within:text-primary-rust transition-colors">search</span>
-                            <input 
-                                type="text" 
-                                id="search-input-desktop"
-                                placeholder="Search for 'Biryani' or 'Rolls'..." 
-                                class="w-full bg-gray-100 border border-transparent focus:bg-white focus:border-primary-rust/50 focus:ring-4 focus:ring-primary-rust/10 rounded-full py-2.5 pl-10 pr-4 text-sm font-medium transition-all outline-none placeholder-gray-400 text-ink"
-                                oninput="handleSearch(this.value)"
-                            >
-                        </div>
-                        <button onclick="toggleFilterPanel()" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-100 hover:bg-white border border-transparent hover:border-gray-200 rounded-full transition-all active:scale-95 group relative">
-                            <span class="material-symbols-outlined text-gray-500 group-hover:text-ink text-[20px]">tune</span>
-                            <span class="text-sm font-medium text-gray-600 group-hover:text-ink">Filter</span>
+                    <div class="flex items-center gap-3">
+                        
+                        <button onclick="toggleFilterPanel()" class="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-sm active:scale-95 transition-transform relative group">
+                            <span class="material-symbols-outlined text-gray-600 group-hover:text-primary-rust text-[20px]">tune</span>
                             <div id="filter-dot-desktop" class="hidden absolute top-2 right-2 w-2 h-2 bg-primary-rust rounded-full ring-1 ring-white"></div>
                         </button>
-                    </div>
 
-                    <div class="flex items-center gap-2 sm:gap-4">
-                        
                         <div class="relative z-50 group" id="mode-selector-wrapper">
                             <button onclick="toggleModeDropdown(event)" id="mode-trigger" 
-                                class="flex items-center gap-2 sm:gap-3 bg-white hover:bg-gray-50 active:bg-gray-100 border border-gray-200 rounded-full pl-1.5 pr-3 py-1.5 shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-rust/20">
-                                
-                                <div class="w-8 h-8 rounded-full bg-[#FFF6F3] flex items-center justify-center text-primary-rust shrink-0">
-                                    <span id="trigger-icon" class="material-symbols-outlined text-[18px]">two_wheeler</span>
-                                </div>
-
-                                <div class="flex flex-col items-start text-left mr-1">
-                                    <span class="text-[10px] uppercase tracking-wider font-bold text-gray-400 leading-none mb-0.5">Mode</span>
-                                    <span id="trigger-label" class="text-sm font-bold text-ink leading-none">Delivery</span>
-                                </div>
-
-                                <span id="trigger-chevron" class="material-symbols-outlined text-gray-400 text-[20px] transition-transform duration-200 group-hover:text-ink">expand_more</span>
+                                class="flex items-center gap-2 bg-white hover:bg-gray-50 active:bg-gray-100 border border-gray-200 rounded-full px-3 py-1.5 shadow-sm transition-all duration-200">
+                                <span id="trigger-icon" class="material-symbols-outlined text-primary-rust text-[18px]">two_wheeler</span>
+                                <span id="trigger-label" class="text-xs font-bold text-ink leading-none">Delivery</span>
+                                <span id="trigger-chevron" class="material-symbols-outlined text-gray-400 text-[18px]">expand_more</span>
                             </button>
 
-                            <div id="mode-dropdown" 
-                                class="absolute top-full right-0 mt-3 w-64 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-gray-100 hidden origin-top-right overflow-hidden ring-1 ring-black/5 transform transition-all">
-                                
-                                <div class="p-2 space-y-1 dropdown-scroll max-h-[300px] overflow-y-auto">
+                            <div id="mode-dropdown" class="absolute top-full right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 hidden origin-top-right overflow-hidden z-[60]">
+                                <div class="p-2 space-y-1">
                                     <button onclick="setGlobalOrderMode('Delivery')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group text-left">
-                                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 group-hover:bg-[#FFF6F3] group-hover:text-primary-rust transition-colors">
-                                            <span class="material-symbols-outlined">two_wheeler</span>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-bold text-ink group-hover:text-primary-rust transition-colors">Delivery</p>
-                                            <p class="text-[11px] text-gray-400">Direct to your door</p>
-                                        </div>
-                                        <span class="ml-auto material-symbols-outlined text-primary-rust opacity-0 group-hover:opacity-100 text-[18px]">check</span>
+                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">two_wheeler</span>
+                                        <span class="text-sm font-bold text-ink group-hover:text-primary-rust">Delivery</span>
                                     </button>
-
                                     <button onclick="setGlobalOrderMode('Pickup')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group text-left">
-                                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 group-hover:bg-[#FFF6F3] group-hover:text-primary-rust transition-colors">
-                                            <span class="material-symbols-outlined">shopping_bag</span>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-bold text-ink group-hover:text-primary-rust transition-colors">Pickup</p>
-                                            <p class="text-[11px] text-gray-400">Skip the delivery fee</p>
-                                        </div>
-                                        <span class="ml-auto material-symbols-outlined text-primary-rust opacity-0 group-hover:opacity-100 text-[18px]">check</span>
+                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">shopping_bag</span>
+                                        <span class="text-sm font-bold text-ink group-hover:text-primary-rust">Pickup</span>
                                     </button>
-
                                     <button onclick="setGlobalOrderMode('Dine-in')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group text-left">
-                                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 group-hover:bg-[#FFF6F3] group-hover:text-primary-rust transition-colors">
-                                            <span class="material-symbols-outlined">restaurant</span>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-bold text-ink group-hover:text-primary-rust transition-colors">Dine-in</p>
-                                            <p class="text-[11px] text-gray-400">Eat at the restaurant</p>
-                                        </div>
-                                        <span class="ml-auto material-symbols-outlined text-primary-rust opacity-0 group-hover:opacity-100 text-[18px]">check</span>
+                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">restaurant</span>
+                                        <span class="text-sm font-bold text-ink group-hover:text-primary-rust">Dine-in</span>
                                     </button>
                                 </div>
                             </div>
@@ -235,83 +175,86 @@
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             
-            <div class="md:hidden sticky top-0 z-50 bg-[#F0F0F5] pt-4 pb-2 shadow-sm transition-all">
-                <div class="flex gap-2 items-center">
-                    <div class="relative flex-1 group bg-white border border-[#E2E3E7] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] flex items-center px-4 h-[44px]">
-                        <span class="material-symbols-outlined text-gray-400">search</span>
+            <section class="pt-4 pb-2 md:pt-10 md:pb-6">
+                <div class="flex flex-col md:items-start text-center md:text-left">
+                    <h1 class="text-[32px] sm:text-5xl font-extrabold leading-[1.1] text-ink tracking-tight mb-6 font-heading">
+                        Delicious food.<br>
+                        <span class="text-primary-rust">Superfast delivery.</span>
+                    </h1>
+                    
+                    <div class="relative w-full md:max-w-lg shadow-soft rounded-full group transition-all duration-300 hover:shadow-hover bg-white p-1.5 flex items-center">
+                        <div class="pl-4 pr-2">
+                            <span class="material-symbols-outlined text-gray-400">search</span>
+                        </div>
                         <input 
                             type="text" 
-                            id="search-input-mobile"
-                            placeholder="Search for dishes..." 
-                            class="w-full bg-transparent border-none focus:ring-0 text-[14px] font-medium text-[#02060C] placeholder-[#8A8F98] h-full ml-3 outline-none font-body"
+                            id="search-input-hero"
+                            placeholder="Search for 'Biryani' or 'Rolls'..." 
+                            class="w-full bg-transparent border-none focus:ring-0 text-base font-medium text-ink placeholder-gray-400 outline-none h-10 font-body"
                             oninput="handleSearch(this.value)"
                         >
+                        <button class="bg-primary-rust text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-orange-500/30">
+                            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                        </button>
                     </div>
-                    <button onclick="toggleFilterPanel()" class="shrink-0 w-[44px] h-[44px] bg-white border border-[#E2E3E7] rounded-full flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.08)] active:scale-95 transition-transform relative">
-                        <span class="material-symbols-outlined text-gray-500">tune</span>
-                        <div id="filter-dot-mobile" class="hidden absolute top-2 right-2 w-2 h-2 bg-primary-rust rounded-full ring-1 ring-white"></div>
-                    </button>
+                    
+                    <input type="hidden" id="search-input-desktop">
+                    <input type="hidden" id="search-input-mobile">
                 </div>
-            </div>
+            </section>
 
-            <div class="relative rounded-3xl overflow-hidden shadow-soft group h-[300px]">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ45_EUYaZRXGCEjhoy96GfQ-qWNEHyhlw-lJ2SbWTty4i_tGRZpIHqnQWH-NpqwnV1RcFleCn_MZxX_0XPLQJd_AlPx9CpxFxazNm6-G1RttAruvA9mAv94vx7kvYcG-YMiOFkBCNtHJjDIo5U0aXT64xlpgenCGtfusvJSb9kFSIzw1cZvPhYpC_a8u50e3xP6X5hHXzcn5BOMKYMDFa0xzj6dY_dq8BGxuBdLy-XJFO7BhmQKo2hG5UKaYeFGCMc-3CVhylLgU"
-                    alt="Hero"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-                <div class="absolute inset-0 hero-gradient flex flex-col justify-end p-6 sm:p-10">
-                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[11px] font-bold uppercase tracking-widest rounded-full mb-3 w-fit border border-white/30 font-body">
-                        Trending Now
-                    </span>
-                    <h2 class="text-3xl sm:text-5xl text-white mb-4 leading-tight font-extrabold tracking-tight font-heading">
-                        Best Food,<br><span class="text-primary-rust">Delivered Fast.</span>
-                    </h2>
-                    <button onclick="document.getElementById('category-nav').scrollIntoView({behavior: 'smooth'})"
-                        class="bg-primary-rust hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-orange-500/30 transition-all transform hover:-translate-y-1 w-fit flex items-center gap-2 font-body">
-                        Order Now
-                        <span class="material-symbols-outlined text-sm">arrow_downward</span>
+            <div id="category-nav" class="py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div class="flex gap-5 overflow-x-auto hide-scrollbar pb-4 px-1 justify-start md:justify-start">
+                    
+                    <button class="category-btn group flex flex-col items-center gap-2 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform active-tab" data-category="all">
+                        <div class="w-[72px] h-[72px] rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border border-transparent group-[.active-tab]:border-primary-rust overflow-hidden">
+                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ45_EUYaZRXGCEjhoy96GfQ-qWNEHyhlw-lJ2SbWTty4i_tGRZpIHqnQWH-NpqwnV1RcFleCn_MZxX_0XPLQJd_AlPx9CpxFxazNm6-G1RttAruvA9mAv94vx7kvYcG-YMiOFkBCNtHJjDIo5U0aXT64xlpgenCGtfusvJSb9kFSIzw1cZvPhYpC_a8u50e3xP6X5hHXzcn5BOMKYMDFa0xzj6dY_dq8BGxuBdLy-XJFO7BhmQKo2hG5UKaYeFGCMc-3CVhylLgU" class="w-full h-full object-cover opacity-90 group-[.active-tab]:opacity-100">
+                        </div>
+                        <span class="text-xs font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">All</span>
                     </button>
-                </div>
-            </div>
 
-            <div id="category-nav" class="sticky top-[68px] md:top-16 z-30 bg-[#F0F0F5]/95 backdrop-blur py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-gray-200/50">
-                <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-1">
-                    <button
-                        class="category-btn flex items-center gap-2 px-4 py-2 rounded-full bg-primary-rust text-white border border-primary-rust shadow-sm shrink-0 transition-transform active:scale-95 text-sm font-semibold font-body"
-                        data-category="all">
-                        <span class="material-symbols-outlined text-[18px]">restaurant</span> All
+                    <button class="category-btn group flex flex-col items-center gap-2 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="rolls">
+                        <div class="w-[72px] h-[72px] rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu4XtsPQVQmzt-oply8j5oOkLj49rQG2-Cd5sczoIoNTc099N2jy-G0avyqsFxa4oBx39r79JppJNpVccRit4LN8fO7YQCZnyU-tBxq4qxhRjjTBpRO_-ht-uEUNTanAikYyK1gX2bwVsHyEZoqwDqt3GIOPXgQdqr2fchUMIsFN9bHTdpDO5TWwSTwQhKUb2TUgNDt1QTeR8llO5TTr9XROLj2q_B5YYOQozYQBD8Vh_i24B2PLpIo2vIAHowK5BtsIP4oFdgv90" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xs font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Rolls</span>
                     </button>
-                    <button
-                        class="category-btn flex items-center gap-2 px-4 py-2 rounded-full bg-white text-ink border border-gray-200 hover:border-primary-rust hover:text-primary-rust shrink-0 transition-all active:scale-95 text-sm font-semibold shadow-sm font-body"
-                        data-category="rolls">
-                        <span class="material-symbols-outlined text-[18px]">fastfood</span> Rolls
+
+                    <button class="category-btn group flex flex-col items-center gap-2 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="kebabs">
+                        <div class="w-[72px] h-[72px] rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiEJd-nNkflydn5dWe2apbwEymsC7rdQ6Na4dNwBSDpat12CGtLFsje0TmgRCMKb2nwWXZzj9e3DPiiU-LU9a5tlReR3GsLPEKvN1lMrLwXpCOpQT-o2h6hqBP0xbDJ3snj6Q6g7dbLXo9wOpQjJmHzAjaeGbNcvyzmzz_D6vNPCXjbKne7G_CG0vXu9MFlEGTYP6RYWTjrEFhNmzmaIDXpnXOYCYM20VNTMZqmnEXKlnKrnpq6oSJWSf0bZITCxUGKLyIi7S7x9E" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xs font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Kebabs</span>
                     </button>
-                    <button
-                        class="category-btn flex items-center gap-2 px-4 py-2 rounded-full bg-white text-ink border border-gray-200 hover:border-primary-rust hover:text-primary-rust shrink-0 transition-all active:scale-95 text-sm font-semibold shadow-sm font-body"
-                        data-category="kebabs">
-                        <span class="material-symbols-outlined text-[18px]">skillet</span> Kebabs
+
+                    <button class="category-btn group flex flex-col items-center gap-2 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="biryani">
+                        <div class="w-[72px] h-[72px] rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xs font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Biryani</span>
                     </button>
-                    <button
-                        class="category-btn flex items-center gap-2 px-4 py-2 rounded-full bg-white text-ink border border-gray-200 hover:border-primary-rust hover:text-primary-rust shrink-0 transition-all active:scale-95 text-sm font-semibold shadow-sm font-body"
-                        data-category="biryani">
-                        <span class="material-symbols-outlined text-[18px]">rice_bowl</span> Biryani
+
+                     <button class="category-btn group flex flex-col items-center gap-2 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="desserts">
+                        <div class="w-[72px] h-[72px] rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JtH1VdyHqTowcQPBewPtHmnFJhsS6uXEUwIs6lDj6fLXl4NdwMOTqgpTxIiysk5eKnVO0ohjXPHO1wTGz-ZaINTgX-dr4Wis2ZTIfGJY7KJNCD7OaRN70RJJdFkeoVWgG3ZYoE4zxYUNdE38fh8-a7n9gPFjmLioLVw-v7-Q85qeJT_LHQkqklbMQqfs9tYlcONPcTWwvvIosMQI8IpQ0qTZCUrT4ipQWhnKUU0ggb5za4KlDK-GDMlM9HqpWHez_BBwP8Z_8-8" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xs font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Desserts</span>
                     </button>
-                    <button
-                        class="category-btn flex items-center gap-2 px-4 py-2 rounded-full bg-white text-ink border border-gray-200 hover:border-primary-rust hover:text-primary-rust shrink-0 transition-all active:scale-95 text-sm font-semibold shadow-sm font-body"
-                        data-category="desserts">
-                        <span class="material-symbols-outlined text-[18px]">icecream</span> Desserts
-                    </button>
+                    
                 </div>
             </div>
 
             <section class="pb-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-xl font-bold text-ink tracking-tight font-heading">Recommended for you</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold text-ink tracking-tight font-heading">Popular now</h2>
                     <span id="search-count" class="text-sm font-medium text-earth hidden"></span>
                 </div>
-                <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div id="menu-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                     </div>
+                
                 <div id="no-results" class="hidden flex-col items-center justify-center py-12 text-center">
                     <span class="material-symbols-outlined text-4xl text-gray-300 mb-2">search_off</span>
                     <p class="text-earth font-medium">No dishes found matching your search.</p>
@@ -320,9 +263,9 @@
             </section>
         </main>
 
-        <div id="cart-bar" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[95%] max-w-md z-40 transition-transform duration-500 translate-y-[200%]">
+        <div id="cart-bar" class="fixed bottom-[90px] left-1/2 -translate-x-1/2 w-[95%] max-w-md z-30 transition-transform duration-500 translate-y-[200%]">
             <div onclick="showCart()"
-                class="bg-[#02060C] text-white p-3 pr-4 rounded-xl shadow-2xl flex items-center justify-between transform transition-transform hover:-translate-y-1 cursor-pointer border border-gray-800 backdrop-blur-xl">
+                class="bg-ink text-white p-3 pr-4 rounded-2xl shadow-xl flex items-center justify-between transform transition-transform hover:-translate-y-1 cursor-pointer border border-gray-800/50 backdrop-blur-xl">
                 <div class="flex flex-col pl-2">
                     <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 font-body">Item Total</span>
                     <div class="flex items-baseline gap-2">
@@ -331,28 +274,42 @@
                         <span id="cart-total" class="font-bold text-base font-body">₹0</span>
                     </div>
                 </div>
-                <button class="bg-primary-rust hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-bold text-sm tracking-wide transition-colors flex items-center gap-2 shadow-md font-body">
+                <button class="bg-primary-rust hover:bg-primary-dark text-white px-4 py-2 rounded-xl font-bold text-sm tracking-wide transition-colors flex items-center gap-2 shadow-lg shadow-orange-500/20 font-body">
                     View Cart
                     <span class="material-symbols-outlined text-[16px]">shopping_bag</span>
                 </button>
             </div>
         </div>
+
+        <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 pb-safe z-40 shadow-nav">
+            <div class="flex justify-around items-center h-[70px] px-2">
+                <button class="flex flex-col items-center justify-center w-full h-full gap-1 text-primary-rust">
+                    <span class="material-symbols-outlined filled-icon text-[26px]">home</span>
+                    <span class="text-[10px] font-bold">Home</span>
+                </button>
+                <button onclick="document.getElementById('category-nav').scrollIntoView({behavior: 'smooth'})" class="flex flex-col items-center justify-center w-full h-full gap-1 text-gray-400 hover:text-ink transition-colors">
+                    <span class="material-symbols-outlined text-[26px]">restaurant_menu</span>
+                    <span class="text-[10px] font-medium">Menu</span>
+                </button>
+                <button onclick="document.getElementById('search-input-hero').focus()" class="flex flex-col items-center justify-center w-full h-full gap-1 text-gray-400 hover:text-ink transition-colors">
+                    <span class="material-symbols-outlined text-[26px]">search</span>
+                    <span class="text-[10px] font-medium">Search</span>
+                </button>
+                <button class="flex flex-col items-center justify-center w-full h-full gap-1 text-gray-400 hover:text-ink transition-colors">
+                    <span class="material-symbols-outlined text-[26px]">help_outline</span>
+                    <span class="text-[10px] font-medium">Help</span>
+                </button>
+            </div>
+        </nav>
     </div> 
 
-    <div id="view-cart" class="fixed inset-0 z-[60] bg-[#F0F0F5] hidden flex flex-col h-full overflow-hidden animate-slideUp">
+    <div id="view-cart" class="fixed inset-0 z-[60] bg-cream hidden flex flex-col h-full overflow-hidden animate-slideUp">
         <header class="sticky top-0 z-50 bg-white px-4 py-4 flex items-center justify-between border-b border-gray-100 shadow-sm">
             <button onclick="goHome()" class="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors active:scale-95 text-ink">
                 <span class="material-symbols-outlined text-[24px]">arrow_back</span>
             </button>
             <h1 class="text-lg font-bold text-ink flex-1 text-center pr-8 tracking-tight font-heading">Your Cart</h1>
         </header>
-
-        <div class="w-full bg-white py-3 flex items-center justify-center gap-2 border-b border-gray-100">
-            <div class="flex items-center gap-1.5 opacity-90">
-                <span class="material-symbols-outlined text-success text-[18px] filled">verified_user</span>
-                <span class="text-[11px] font-bold text-ink tracking-wide uppercase font-body">Zwigato Promise</span>
-            </div>
-        </div>
 
         <div class="flex-1 w-full max-w-md mx-auto p-4 flex flex-col gap-5 overflow-y-auto pb-40">
             <div id="cart-items-container" class="flex flex-col gap-4"></div>
@@ -363,7 +320,7 @@
                     <label class="text-sm font-bold text-ink uppercase tracking-wide font-body">Cooking Requests</label>
                 </div>
                 <input id="order-notes"
-                    class="w-full bg-[#F6F7F9] border border-gray-200 rounded-xl p-3.5 text-sm text-ink placeholder-gray-400 focus:ring-2 focus:ring-primary-rust focus:border-transparent transition-all outline-none font-body"
+                    class="w-full bg-cream border border-gray-200 rounded-xl p-3.5 text-sm text-ink placeholder-gray-400 focus:ring-2 focus:ring-primary-rust focus:border-transparent transition-all outline-none font-body"
                     placeholder="Add notes (e.g., less spicy)...">
             </div>
 
@@ -394,7 +351,7 @@
         <div class="fixed bottom-0 left-0 w-full z-40 bg-white border-t border-gray-100 p-4 pb-6 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
             <div class="max-w-md mx-auto">
                 <button onclick="showCheckout()"
-                    class="w-full group relative bg-primary-rust hover:bg-primary-dark text-white font-bold text-base py-3.5 px-6 rounded-xl shadow-lg shadow-orange-500/20 flex items-center justify-between transition-all active:scale-[0.98]">
+                    class="w-full group relative bg-primary-rust hover:bg-primary-dark text-white font-bold text-base py-3.5 px-6 rounded-2xl shadow-lg shadow-orange-500/20 flex items-center justify-between transition-all active:scale-[0.98]">
                     <div class="flex flex-col items-start pl-1">
                         <span class="text-[10px] uppercase tracking-wider opacity-90 font-semibold mb-[-2px] font-body">Total</span>
                         <span id="cart-footer-total" class="text-lg font-bold font-heading">₹0</span>
@@ -411,7 +368,7 @@
     </div>
 
 
-    <div id="view-checkout" class="fixed inset-0 z-[70] bg-[#F0F0F5] hidden flex flex-col h-full overflow-hidden animate-slideUp">
+    <div id="view-checkout" class="fixed inset-0 z-[70] bg-cream hidden flex flex-col h-full overflow-hidden animate-slideUp">
         <div class="sticky top-0 z-20 flex items-center bg-white p-4 pb-4 justify-between border-b border-gray-100 shadow-sm">
             <div onclick="showCart()"
                 class="text-ink flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
@@ -480,7 +437,6 @@
                         </path>
                     </svg>
                 </button>
-                <p class="text-center text-xs text-gray-400 mt-2 font-body">Ready to send order to Zwigato</p>
             </div>
         </div>
     </div>
@@ -508,42 +464,42 @@
     </div>
 
     <div id="filter-panel" class="fixed inset-0 z-[100] bg-black/50 hidden flex justify-center items-end md:items-center backdrop-blur-sm animate-fade">
-        <div class="bg-white w-full max-w-md md:rounded-2xl rounded-t-2xl shadow-2xl flex flex-col max-h-[85vh] animate-slideUp">
-            <div class="flex items-center justify-between p-5 border-b border-gray-100">
-                <h3 class="text-lg font-bold text-ink font-heading">Filters</h3>
-                <button onclick="toggleFilterPanel()" class="text-gray-400 hover:text-ink transition-colors">
-                    <span class="material-symbols-outlined">close</span>
+        <div class="bg-white w-full max-w-md md:rounded-2xl rounded-t-3xl shadow-2xl flex flex-col max-h-[85vh] animate-slideUp">
+            <div class="flex items-center justify-between p-6 border-b border-gray-100">
+                <h3 class="text-xl font-bold text-ink font-heading">Filters</h3>
+                <button onclick="toggleFilterPanel()" class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-500 hover:bg-gray-200 transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
                 </button>
             </div>
             
-            <div class="p-5 overflow-y-auto space-y-6">
+            <div class="p-6 overflow-y-auto space-y-8">
                 <div>
-                    <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Type</h4>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Preference</h4>
                     <div class="flex gap-3">
-                        <label class="flex items-center gap-2 cursor-pointer group">
+                        <label class="flex items-center gap-3 cursor-pointer group w-full p-4 border border-gray-200 rounded-xl hover:border-green-600 transition-colors bg-gray-50/50">
                             <input type="checkbox" id="filter-veg" class="peer hidden" onchange="updateFilterState('veg', this.checked)">
-                            <div class="w-5 h-5 border-2 border-gray-300 rounded peer-checked:bg-green-600 peer-checked:border-green-600 flex items-center justify-center transition-all">
+                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full peer-checked:bg-green-600 peer-checked:border-green-600 flex items-center justify-center transition-all bg-white">
                                 <span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100">check</span>
                             </div>
-                            <span class="text-sm font-medium text-ink group-hover:text-green-600 transition-colors">Veg Only</span>
+                            <span class="text-base font-bold text-ink group-hover:text-green-600 transition-colors">Veg Only</span>
                         </label>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Price</h4>
-                    <div class="flex flex-wrap gap-2">
-                         <button onclick="updateFilterState('price', 'all')" id="price-all" class="price-btn px-4 py-2 rounded-full border border-gray-200 text-sm font-medium hover:border-primary-rust hover:text-primary-rust transition-all">Any</button>
-                         <button onclick="updateFilterState('price', 'low')" id="price-low" class="price-btn px-4 py-2 rounded-full border border-gray-200 text-sm font-medium hover:border-primary-rust hover:text-primary-rust transition-all">Under ₹100</button>
-                         <button onclick="updateFilterState('price', 'mid')" id="price-mid" class="price-btn px-4 py-2 rounded-full border border-gray-200 text-sm font-medium hover:border-primary-rust hover:text-primary-rust transition-all">₹100 - ₹300</button>
-                         <button onclick="updateFilterState('price', 'high')" id="price-high" class="price-btn px-4 py-2 rounded-full border border-gray-200 text-sm font-medium hover:border-primary-rust hover:text-primary-rust transition-all">Over ₹300</button>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Price Range</h4>
+                    <div class="flex flex-wrap gap-3">
+                         <button onclick="updateFilterState('price', 'all')" id="price-all" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">Any</button>
+                         <button onclick="updateFilterState('price', 'low')" id="price-low" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">&lt; ₹100</button>
+                         <button onclick="updateFilterState('price', 'mid')" id="price-mid" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">₹100+</button>
+                         <button onclick="updateFilterState('price', 'high')" id="price-high" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">₹300+</button>
                     </div>
                 </div>
             </div>
 
-            <div class="p-5 border-t border-gray-100 flex gap-4">
-                <button onclick="clearFilters()" class="flex-1 py-3 rounded-xl border border-gray-200 text-ink font-bold hover:bg-gray-50 transition-all">Clear</button>
-                <button onclick="applyFilters()" class="flex-[2] py-3 rounded-xl bg-primary-rust text-white font-bold hover:bg-primary-dark shadow-lg shadow-orange-500/20 transition-all">Apply Filters</button>
+            <div class="p-6 border-t border-gray-100 flex gap-4 bg-white md:rounded-b-2xl">
+                <button onclick="clearFilters()" class="flex-1 py-3.5 rounded-xl border border-gray-200 text-ink font-bold hover:bg-gray-50 transition-all">Clear</button>
+                <button onclick="applyFilters()" class="flex-[2] py-3.5 rounded-xl bg-primary-rust text-white font-bold hover:bg-primary-dark shadow-lg shadow-orange-500/20 transition-all">Show Results</button>
             </div>
         </div>
     </div>
@@ -555,10 +511,9 @@
     <script>
         /**
          * ZWIGATO - Client Side Logic
-         * Preserved functionality from Lucknow Wala
          */
 
-        // --- 1. DATA: The Menu (BIOS + Visuals) ---
+        // --- 1. DATA: The Menu ---
         const MENU_ITEMS = [
             {
                 id: "roll-veg-kabab",
@@ -630,27 +585,20 @@
             }
         ];
 
-        // --- 2. BOLTA MENU: Voice Interactions (Content preserved) ---
+        // --- 2. PHRASES ---
         const NAWABI_PHRASES = {
             add: ["Wah! Lazeez choice hai Janab!", "Behtareen peshkash!", "Shauk farmayein!"],
             remove: ["Koi baat nahi, kuch aur try karein?", "Dil chota na karein Janab."]
         };
 
-        // --- 3. STATE MANAGEMENT ---
-        let cart = {}; // { itemId: quantity } - Legacy cart for simple counts
+        // --- 3. STATE ---
+        let cart = {}; 
         let currentCategory = 'all';
         let searchQuery = '';
-        // NEW: Filter State
-        let activeFilters = {
-            veg: false,
-            price: 'all' // all, low (<100), mid (100-300), high (>300)
-        };
-        let tempFilters = { ...activeFilters }; // For modal interaction
-        
-        // NEW: Feature 1 & 3 - Global Mode State & Detailed Cart
+        let activeFilters = { veg: false, price: 'all' };
+        let tempFilters = { ...activeFilters };
         let currentOrderMode = 'Delivery';
         let hasExplicitlySelectedMode = false;
-        // detailedCart: { itemId: { 'Delivery': qty, 'Pickup': qty, ... } }
         let detailedCart = {};
 
         // --- 4. DOM ELEMENTS ---
@@ -687,7 +635,6 @@
 
         // --- 5. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Load persisted cart if needed (Phase 2+)
             renderMenu();
             updateCartUI();
             setupCategoryFilters();
@@ -700,12 +647,10 @@
         function renderMenu() {
             menuContainer.innerHTML = '';
 
-            // 1. Filter by Category
             let itemsToShow = currentCategory === 'all'
                 ? MENU_ITEMS
                 : MENU_ITEMS.filter(item => item.category === currentCategory);
 
-            // 2. Filter by Search
             if (searchQuery) {
                 const query = searchQuery.toLowerCase();
                 itemsToShow = itemsToShow.filter(item => 
@@ -715,7 +660,6 @@
                 );
             }
 
-            // 3. Filter by Active Filters (Veg / Price)
             if (activeFilters.veg) {
                 itemsToShow = itemsToShow.filter(item => item.isVeg);
             }
@@ -728,7 +672,6 @@
                 });
             }
 
-            // Show No Results
             const noResults = document.getElementById('no-results');
             const searchCount = document.getElementById('search-count');
             
@@ -751,72 +694,69 @@
                 const cartQty = cart[item.id] || 0;
 
                 const card = document.createElement('div');
-                // Updated Visuals: White bg, softer borders, no colored border-left
-                card.className = "bg-white rounded-2xl shadow-soft border border-gray-100 overflow-hidden hover:shadow-hover transition-all duration-300 group flex flex-col h-full";
+                // NEW CARD DESIGN: Clean, white, image on top, rounded corners (image_c699df.png style)
+                card.className = "bg-white rounded-2xl shadow-soft border border-transparent hover:border-gray-100 overflow-hidden group flex flex-col h-full";
 
                 card.innerHTML = `
-            <div class="relative h-44 overflow-hidden">
-                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                ${item.tag ? `<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[10px] font-bold shadow-sm uppercase tracking-wider text-primary-rust border border-gray-200 font-body">${item.tag}</div>` : ''}
-            </div>
-            
-            <div class="p-4 flex flex-col flex-grow">
-                <div class="flex justify-between items-start mb-1">
-                    <h3 class="font-bold text-lg text-ink leading-tight group-hover:text-primary-rust transition-colors font-heading">${item.name}</h3>
-                    <div class="border ${item.isVeg ? 'border-green-600' : 'border-primary-rust'} p-0.5 rounded-[4px] shrink-0 mt-1">
-                        <div class="w-2 h-2 ${item.isVeg ? 'bg-green-600' : 'bg-primary-rust'} rounded-full"></div>
+                    <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-50">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                        ${item.tag ? `<div class="absolute top-2 left-2 bg-white/95 backdrop-blur px-2 py-0.5 rounded-[6px] text-[10px] font-bold shadow-sm uppercase tracking-wider text-primary-rust font-body">${item.tag}</div>` : ''}
+                        ${item.isVeg 
+                            ? `<div class="absolute bottom-2 right-2 bg-white/90 p-1 rounded-[4px] shadow-sm"><div class="border border-green-600 p-0.5 rounded-[2px] flex items-center justify-center w-3 h-3"><div class="w-1.5 h-1.5 bg-green-600 rounded-full"></div></div></div>` 
+                            : `<div class="absolute bottom-2 right-2 bg-white/90 p-1 rounded-[4px] shadow-sm"><div class="border border-primary-rust p-0.5 rounded-[2px] flex items-center justify-center w-3 h-3"><div class="w-1.5 h-1.5 bg-primary-rust rounded-full"></div></div></div>`
+                        }
                     </div>
-                </div>
-                
-                <p class="text-xs text-earth mb-4 line-clamp-2 font-body">${item.description}</p>
-                
-                <div class="mt-auto flex items-center justify-between">
-                    <span class="font-bold text-lg text-ink font-heading">₹${item.price}</span>
                     
-                    ${cartQty === 0 ? `
-                        <button onclick="addToCart('${item.id}')" class="bg-white border border-gray-200 text-primary-rust hover:bg-[#FFF6F3] hover:border-primary-rust px-6 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all shadow-sm font-body">
-                            ADD
-                        </button>
-                    ` : `
-                        <div class="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-                            <button onclick="updateQuantity('${item.id}', -1)" class="px-3 py-1.5 text-earth hover:bg-gray-50 transition-colors font-bold text-lg font-body">-</button>
-                            <span class="px-2 text-sm font-bold min-w-[20px] text-center text-primary-rust font-body">${cartQty}</span>
-                            <button onclick="updateQuantity('${item.id}', 1)" class="px-3 py-1.5 text-primary-rust hover:bg-gray-50 transition-colors font-bold text-lg font-body">+</button>
+                    <div class="p-3 flex flex-col flex-grow">
+                        <h3 class="font-bold text-[15px] text-ink leading-tight mb-1 line-clamp-2 font-heading">${item.name}</h3>
+                        <p class="text-[11px] text-gray-400 mb-3 line-clamp-2 font-body leading-relaxed">${item.description}</p>
+                        
+                        <div class="mt-auto flex items-center justify-between">
+                            <span class="font-bold text-[16px] text-ink font-heading">₹${item.price}</span>
+                            
+                            ${cartQty === 0 ? `
+                                <button onclick="addToCart('${item.id}')" class="h-8 px-5 bg-white border border-gray-200 text-primary-rust text-xs font-bold rounded-lg hover:border-primary-rust hover:bg-[#FFF6F3] transition-all shadow-sm uppercase tracking-wide">
+                                    ADD
+                                </button>
+                            ` : `
+                                <div class="flex items-center h-8 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                                    <button onclick="updateQuantity('${item.id}', -1)" class="w-8 h-full flex items-center justify-center text-earth hover:bg-gray-50 font-bold">-</button>
+                                    <span class="w-6 text-center text-xs font-bold text-primary-rust">${cartQty}</span>
+                                    <button onclick="updateQuantity('${item.id}', 1)" class="w-8 h-full flex items-center justify-center text-primary-rust hover:bg-gray-50 font-bold">+</button>
+                                </div>
+                            `}
                         </div>
-                    `}
-                </div>
-            </div>
-        `;
+                    </div>
+                `;
                 menuContainer.appendChild(card);
             });
         }
         
-        // NEW: Search Logic
         function handleSearch(query) {
             searchQuery = query.trim();
-            // Sync mobile/desktop inputs
-            document.getElementById('search-input-desktop').value = searchQuery;
-            document.getElementById('search-input-mobile').value = searchQuery;
+            // Sync all inputs
+            const heroInput = document.getElementById('search-input-hero');
+            const desktopInput = document.getElementById('search-input-desktop');
+            const mobileInput = document.getElementById('search-input-mobile');
+
+            if(heroInput && heroInput.value !== searchQuery) heroInput.value = searchQuery;
+            if(desktopInput) desktopInput.value = searchQuery;
+            if(mobileInput) mobileInput.value = searchQuery;
             
             if(searchQuery) {
-                // Scroll to menu if searching
                 document.getElementById('category-nav').scrollIntoView({behavior: 'smooth'});
             }
-            
             renderMenu();
         }
 
         function clearSearch() {
             handleSearch('');
-            document.getElementById('search-input-desktop').value = '';
-            document.getElementById('search-input-mobile').value = '';
         }
 
-        // NEW: Filter Logic
+        // Filter Logic
         function toggleFilterPanel() {
             if (filterPanel.classList.contains('hidden')) {
                 filterPanel.classList.remove('hidden');
-                // Reset temp to active
                 tempFilters = { ...activeFilters };
                 syncFilterUI();
             } else {
@@ -830,13 +770,11 @@
         }
 
         function syncFilterUI() {
-            // Veg
             document.getElementById('filter-veg').checked = tempFilters.veg;
             
-            // Price Buttons
             document.querySelectorAll('.price-btn').forEach(btn => {
                 btn.classList.remove('bg-primary-rust', 'text-white', 'border-primary-rust');
-                btn.classList.add('bg-white', 'border-gray-200', 'text-ink'); // Reset default
+                btn.classList.add('bg-white', 'border-gray-200', 'text-ink');
                 
                 if (btn.id === `price-${tempFilters.price}`) {
                     btn.classList.remove('bg-white', 'border-gray-200', 'text-ink');
@@ -860,30 +798,26 @@
         function updateFilterIndicators() {
             const hasFilters = activeFilters.veg || activeFilters.price !== 'all';
             const desktopDot = document.getElementById('filter-dot-desktop');
-            const mobileDot = document.getElementById('filter-dot-mobile');
             
             if (hasFilters) {
                 desktopDot.classList.remove('hidden');
-                mobileDot.classList.remove('hidden');
             } else {
                 desktopDot.classList.add('hidden');
-                mobileDot.classList.add('hidden');
             }
         }
         
-        // NEW: Feature 1 - Global Mode Logic (REFINED)
+        // Mode Logic
         function setGlobalOrderMode(mode) {
             currentOrderMode = mode;
             hasExplicitlySelectedMode = true;
             updateModeSelectorUI();
-            toggleModeDropdown(); // Close dropdown after selection
+            toggleModeDropdown();
         }
 
-        // REFINED: Dropdown UI Logic
         const modeConfig = {
-            'Delivery': { icon: 'two_wheeler', desc: 'Direct to your door' },
-            'Pickup': { icon: 'shopping_bag', desc: 'Skip the delivery fee' },
-            'Dine-in': { icon: 'restaurant', desc: 'Eat at the restaurant' }
+            'Delivery': { icon: 'two_wheeler' },
+            'Pickup': { icon: 'shopping_bag' },
+            'Dine-in': { icon: 'restaurant' }
         };
 
         function updateModeSelectorUI() {
@@ -895,23 +829,20 @@
                 icon.innerText = modeConfig[currentOrderMode].icon;
             }
 
-            // Update Active State in Dropdown
             const buttons = document.querySelectorAll('#mode-dropdown button');
             buttons.forEach(btn => {
-                const modeName = btn.querySelector('p.font-bold').innerText;
-                const checkIcon = btn.querySelector('.material-symbols-outlined.ml-auto');
-                const iconContainer = btn.querySelector('.w-10');
+                const modeName = btn.querySelector('.text-sm').innerText;
+                const iconSpan = btn.querySelector('.material-symbols-outlined');
+                const textSpan = btn.querySelector('.text-sm');
                 
                 if (modeName === currentOrderMode) {
                     btn.classList.add('bg-orange-50');
-                    checkIcon.classList.remove('opacity-0');
-                    iconContainer.classList.add('bg-[#FFF6F3]', 'text-primary-rust');
-                    iconContainer.classList.remove('bg-gray-100', 'text-gray-500');
+                    iconSpan.classList.replace('text-gray-400', 'text-primary-rust');
+                    textSpan.classList.replace('text-ink', 'text-primary-rust');
                 } else {
                     btn.classList.remove('bg-orange-50');
-                    checkIcon.classList.add('opacity-0');
-                    iconContainer.classList.remove('bg-[#FFF6F3]', 'text-primary-rust');
-                    iconContainer.classList.add('bg-gray-100', 'text-gray-500');
+                    iconSpan.classList.replace('text-primary-rust', 'text-gray-400');
+                    textSpan.classList.replace('text-primary-rust', 'text-ink');
                 }
             });
         }
@@ -932,18 +863,16 @@
             }
         }
 
-        // Close dropdown when clicking outside
         function handleBodyClick(event) {
             const dropdown = document.getElementById('mode-dropdown');
             const trigger = document.getElementById('mode-trigger');
             
-            if (!dropdown.classList.contains('hidden') && !trigger.contains(event.target) && !dropdown.contains(event.target)) {
+            if (dropdown && !dropdown.classList.contains('hidden') && !trigger.contains(event.target) && !dropdown.contains(event.target)) {
                  dropdown.classList.add('hidden');
                  document.getElementById('trigger-chevron').classList.remove('rotate-180');
             }
         }
 
-        // NEW: Feature 2 - Modal Logic
         let pendingItemId = null;
         
         function showModeModal() {
@@ -958,13 +887,12 @@
             setGlobalOrderMode(mode);
             modeModal.classList.add('hidden');
             if (pendingItemId) {
-                addToCart(pendingItemId, true); // retry
+                addToCart(pendingItemId, true);
                 pendingItemId = null;
             }
         }
 
         function addToCart(itemId, silence = false) {
-            // NEW: Feature 2 Interception
             const isFirstAdd = Object.keys(cart).length === 0;
             if (isFirstAdd && !hasExplicitlySelectedMode) {
                 pendingItemId = itemId;
@@ -975,8 +903,6 @@
             if (!cart[itemId]) cart[itemId] = 0;
             cart[itemId]++;
 
-            // NEW: Feature 3 - Sticky Mode Logic
-            // Initialize detailed entry if needed
             if (!detailedCart[itemId]) detailedCart[itemId] = {};
             if (!detailedCart[itemId][currentOrderMode]) detailedCart[itemId][currentOrderMode] = 0;
             
@@ -991,24 +917,16 @@
         function updateQuantity(itemId, change) {
             if (!cart[itemId]) return;
 
-            // NEW: Logic to handle removal/addition respecting current mode
-            // When updating via Home Card, we assume currentOrderMode context
-            
             if (change > 0) {
-                // Add is simple, use current mode
                 if (!detailedCart[itemId]) detailedCart[itemId] = {};
                 if (!detailedCart[itemId][currentOrderMode]) detailedCart[itemId][currentOrderMode] = 0;
                 detailedCart[itemId][currentOrderMode]++;
                 cart[itemId]++;
             } else {
-                // Remove logic
-                // Try to remove from current mode first
                 if (detailedCart[itemId] && detailedCart[itemId][currentOrderMode] > 0) {
                     detailedCart[itemId][currentOrderMode]--;
                     cart[itemId]--;
                 } else {
-                    // If current mode has 0, but total > 0, remove from ANY available mode
-                    // This handles edge case where user switches mode and tries to decrement
                     const modes = Object.keys(detailedCart[itemId]);
                     for (let m of modes) {
                         if (detailedCart[itemId][m] > 0) {
@@ -1027,20 +945,17 @@
             }
 
             updateCartUI();
-            renderMenu(); // Updates Home Grid
-            renderCartList(); // Updates Cart View if open
+            renderMenu();
+            renderCartList();
         }
 
-        // NEW: Feature 4 - Cart Specific Update
         function updateCartModeQuantity(itemId, mode, change) {
-            // Ensure structure exists
             if (!detailedCart[itemId]) detailedCart[itemId] = {};
             if (!detailedCart[itemId][mode]) detailedCart[itemId][mode] = 0;
 
             detailedCart[itemId][mode] += change;
-            cart[itemId] += change; // Keep legacy total synced
+            cart[itemId] += change;
 
-            // Cleanup
             if (detailedCart[itemId][mode] <= 0) {
                 delete detailedCart[itemId][mode];
             }
@@ -1054,7 +969,6 @@
             renderCartList();
         }
 
-        // NEW: Feature 4 - Move item between modes
         function moveItemMode(itemId, oldMode, newMode) {
             if (oldMode === newMode) return;
             
@@ -1078,7 +992,6 @@
                 return sum + (item.price * qty);
             }, 0);
 
-            // 1. Home Bar
             if (totalQty > 0) {
                 cartBar.classList.remove('translate-y-[200%]');
                 cartCount.innerText = `${totalQty} Item${totalQty > 1 ? 's' : ''}`;
@@ -1087,24 +1000,19 @@
                 cartBar.classList.add('translate-y-[200%]');
             }
 
-            // 2. Cart View Totals
             const formattedTotal = `\u20B9${totalPrice}`;
             cartViewSubtotal.innerText = formattedTotal;
             cartViewTotal.innerText = formattedTotal;
             cartFooterTotal.innerText = formattedTotal;
-
-            // 3. Checkout Totals
             checkoutSubtotal.innerText = formattedTotal;
             checkoutTotal.innerText = formattedTotal;
         }
-
-        // --- 7. OVERLAY MANAGERS ---
 
         function showCart() {
             renderCartList();
             viewCart.classList.remove('hidden');
             viewCheckout.classList.add('hidden');
-            document.body.style.overflow = 'hidden'; // Lock scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function showCheckout() {
@@ -1131,11 +1039,9 @@
                 return;
             }
 
-            // NEW: Feature 4 - Group by Mode
             const modes = ['Delivery', 'Pickup', 'Dine-in'];
             
             modes.forEach(mode => {
-                // Check if any items exist for this mode
                 let itemsInMode = [];
                 Object.keys(detailedCart).forEach(itemId => {
                     if (detailedCart[itemId][mode] > 0) {
@@ -1144,7 +1050,6 @@
                 });
 
                 if (itemsInMode.length > 0) {
-                    // Render Section Header
                     const header = document.createElement('div');
                     header.className = "flex items-center gap-2 mb-2 mt-2";
                     header.innerHTML = `
@@ -1153,20 +1058,18 @@
                     `;
                     cartItemsContainer.appendChild(header);
 
-                    // Render Items
                     itemsInMode.forEach(({ id, qty }) => {
                         const item = MENU_ITEMS.find(i => i.id === id);
                         const el = document.createElement('div');
                         el.className = "group relative bg-white rounded-2xl p-3 flex gap-4 shadow-sm border border-gray-100";
                         
-                        // Mode Dropdown Builder
                         const otherModes = modes.filter(m => m !== mode);
                         let dropdownOptions = otherModes.map(m => 
                             `<option value="${m}">Move to ${m}</option>`
                         ).join('');
 
                         el.innerHTML = `
-                            <div class="shrink-0 w-24 h-24 rounded-xl bg-gray-50 overflow-hidden relative shadow-inner">
+                            <div class="shrink-0 w-20 h-20 rounded-xl bg-gray-50 overflow-hidden relative shadow-inner">
                                 <img src="${item.image}" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 flex flex-col justify-between py-0.5">
@@ -1178,7 +1081,7 @@
                                                     <div class="border ${item.isVeg ? 'border-green-600' : 'border-primary-rust'} p-0.5 rounded-[3px] w-4 h-4 flex items-center justify-center">
                                                         <div class="w-2 h-2 ${item.isVeg ? 'bg-green-600' : 'bg-primary-rust'} rounded-full"></div>
                                                     </div>
-                                                    <h3 class="font-bold text-base text-ink leading-tight line-clamp-2 font-heading">${item.name}</h3>
+                                                    <h3 class="font-bold text-sm text-ink leading-tight line-clamp-2 font-heading">${item.name}</h3>
                                                 </div>
                                                 
                                                 <select onchange="moveItemMode('${id}', '${mode}', this.value)" class="text-[10px] bg-gray-50 border border-gray-200 rounded px-1 py-0.5 text-earth focus:outline-none">
@@ -1186,16 +1089,15 @@
                                                     ${dropdownOptions}
                                                 </select>
                                             </div>
-                                            <p class="text-xs text-earth line-clamp-1 font-body">${item.description}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-end mt-2">
-                                    <p class="font-bold text-lg text-ink font-heading">₹${item.price}</p>
-                                    <div class="flex items-center bg-white rounded-lg border border-gray-200 h-8 shadow-sm overflow-hidden">
-                                        <button onclick="updateCartModeQuantity('${item.id}', '${mode}', -1)" class="w-9 h-full flex items-center justify-center text-earth hover:bg-gray-50 transition-colors font-bold text-lg font-body">-</button>
-                                        <span class="w-6 text-center text-sm font-bold text-primary-rust tabular-nums font-body">${qty}</span>
-                                        <button onclick="updateCartModeQuantity('${item.id}', '${mode}', 1)" class="w-9 h-full flex items-center justify-center text-primary-rust hover:bg-gray-50 transition-colors font-bold text-lg font-body">+</button>
+                                    <p class="font-bold text-base text-ink font-heading">₹${item.price}</p>
+                                    <div class="flex items-center bg-white rounded-lg border border-gray-200 h-7 shadow-sm overflow-hidden">
+                                        <button onclick="updateCartModeQuantity('${item.id}', '${mode}', -1)" class="w-8 h-full flex items-center justify-center text-earth hover:bg-gray-50 font-bold">-</button>
+                                        <span class="w-6 text-center text-xs font-bold text-primary-rust tabular-nums">${qty}</span>
+                                        <button onclick="updateCartModeQuantity('${item.id}', '${mode}', 1)" class="w-8 h-full flex items-center justify-center text-primary-rust hover:bg-gray-50 font-bold">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -1205,8 +1107,6 @@
                 }
             });
         }
-
-        // --- 8. WHATSAPP LOGIC ---
 
         function placeOrder() {
             const name = inputName.value.trim();
@@ -1225,7 +1125,6 @@
             message += `----------------\n`;
 
             let total = 0;
-            // NEW: Feature 5 - Mixed Order Handling in Payload
             const modes = ['Delivery', 'Pickup', 'Dine-in'];
             
             modes.forEach(mode => {
@@ -1257,35 +1156,18 @@
             const encodedMsg = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/919876543210?text=${encodedMsg}`;
 
-            // Clear cart (optional)
-            // cart = {}; updateCartUI(); renderMenu(); goHome();
-
             window.open(whatsappUrl, '_blank');
         }
 
-        // --- UTILS ---
         function setupCategoryFilters() {
             categoryButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    categoryButtons.forEach(b => {
-                        // Reset all buttons to default style
-                        b.classList.remove('bg-primary-rust', 'text-white', 'border-primary-rust');
-                        b.classList.add('bg-white', 'text-ink', 'border-gray-200');
-                    });
-                    // Active button style
-                    btn.classList.remove('bg-white', 'text-ink', 'border-gray-200');
-                    btn.classList.add('bg-primary-rust', 'text-white', 'border-primary-rust');
+                    categoryButtons.forEach(b => b.classList.remove('active-tab'));
+                    btn.classList.add('active-tab');
                     currentCategory = btn.dataset.category;
                     renderMenu();
                 });
             });
-        }
-        
-        // NEW: Mobile toggle logic
-        function toggleMobileModeDropdown() {
-             const modes = ['Delivery', 'Pickup', 'Dine-in'];
-             const nextIndex = (modes.indexOf(currentOrderMode) + 1) % modes.length;
-             setGlobalOrderMode(modes[nextIndex]);
         }
 
         function speak(phrasesArray) {
@@ -1295,7 +1177,6 @@
 
         function showToast(message) {
             const toast = document.createElement('div');
-            // Toast Visual Update: Darker, cleaner
             toast.className = "transform transition-all duration-500 translate-y-10 opacity-0 bg-[#333333] text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-3 border border-gray-700 min-w-max z-[100]";
             toast.innerHTML = `<span class="tracking-wide text-sm font-medium font-body">${message}</span>`;
             toastContainer.appendChild(toast);
@@ -1305,7 +1186,6 @@
                 setTimeout(() => toast.remove(), 500);
             }, 3000);
         }
-
     </script>
 </body>
 
