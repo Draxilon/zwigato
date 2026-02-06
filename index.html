@@ -21,8 +21,9 @@
                         'cream': '#F9F9FB',
                         'gold': '#E2E3E7',
                         'earth': '#5B5F65',
-                        'success': '#34C759',
-                        'info': '#0A66C2'
+                        'success': '#34C759', // Swiggy Green
+                        'info': '#0A66C2',
+                        'brand-bg': '#FFF0EB'
                     },
                     fontFamily: {
                         'display': ["Plus Jakarta Sans", "Inter", "sans-serif"],
@@ -38,7 +39,12 @@
                     boxShadow: {
                         'soft': '0 8px 24px rgba(0,0,0,0.04)',
                         'hover': '0 12px 32px rgba(0,0,0,0.08)',
-                        'nav': '0 -4px 20px rgba(0,0,0,0.03)'
+                        'nav': '0 -4px 20px rgba(0,0,0,0.03)',
+                        'float': '0 10px 40px -10px rgba(0,0,0,0.2)'
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to bottom, #FFF0EB 0%, #FFFFFF 100%)",
+                        'shimmer': "linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent)"
                     },
                     animation: {
                         'dropdown-enter': 'dropdownEnter 0.2s ease-out forwards',
@@ -115,9 +121,11 @@
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        /* Swiggy-like gradient text */
+        .text-gradient {
+            background: linear-gradient(90deg, #FF5200 0%, #FF8A00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
@@ -126,20 +134,25 @@
 
     <div id="view-home" class="transition-opacity duration-300">
         
-        <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md pt-2 pb-2 transition-all duration-300">
+        <header class="sticky top-0 z-40 bg-hero-pattern/95 backdrop-blur-md pt-2 pb-2 transition-all duration-300 border-b border-orange-100/50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-14">
                     
-                    <div class="flex items-center shrink-0">
+                    <div class="flex items-center gap-4">
                         <div class="zwigato-logo text-2xl text-ink leading-normal cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
                             Zwigato<span class="text-primary-rust">.</span>
+                        </div>
+                        <div class="hidden md:flex items-center gap-1 text-xs font-bold text-earth/70 bg-white/50 px-3 py-1 rounded-full">
+                            <span class="material-symbols-outlined text-[14px]">location_on</span>
+                            <span>Lucknow, India</span>
+                            <span class="material-symbols-outlined text-[14px]">expand_more</span>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-3">
                         <div class="relative z-50 group" id="mode-selector-wrapper">
                             <button onclick="toggleModeDropdown(event)" id="mode-trigger" 
-                                class="flex items-center gap-2 bg-white hover:bg-gray-50 active:bg-gray-100 border border-gray-200 rounded-full px-3 py-1.5 shadow-sm transition-all duration-200">
+                                class="flex items-center gap-2 bg-white hover:bg-orange-50 active:bg-orange-100 border border-gray-200/50 rounded-full px-3 py-1.5 shadow-sm transition-all duration-200 ring-1 ring-gray-100">
                                 <span id="trigger-icon" class="material-symbols-outlined text-primary-rust text-[18px]">two_wheeler</span>
                                 <span id="trigger-label" class="text-xs font-bold text-ink leading-none">Delivery</span>
                                 <span id="trigger-chevron" class="material-symbols-outlined text-gray-400 text-[18px]">expand_more</span>
@@ -167,35 +180,34 @@
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 pb-20">
             
-            <section class="pt-4 pb-2 md:pt-12 md:pb-8">
-                <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
-                    <h1 class="text-[32px] sm:text-5xl md:text-6xl font-extrabold leading-[1.1] text-ink tracking-tight mb-8 font-heading">
-                        Delicious food.<br>
-                        <span class="text-primary-rust">Superfast delivery.</span>
+            <section class="pt-6 pb-2 md:pt-12 md:pb-8 relative">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-full bg-gradient-to-b from-[#FFF0EB] to-transparent -z-10 rounded-b-[50%] opacity-60"></div>
+
+                <div class="flex flex-col items-center text-center max-w-2xl mx-auto">
+                    <span class="text-[10px] font-bold tracking-widest text-primary-rust uppercase mb-3 bg-white px-3 py-1 rounded-full shadow-sm">No.1 in Town</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] text-ink tracking-tight mb-8 font-heading">
+                        Order food you<br>
+                        <span class="text-gradient">absolutely love.</span>
                     </h1>
                     
-                    <div class="relative w-full shadow-soft rounded-full group transition-all duration-300 hover:shadow-hover bg-white p-1.5 flex items-center border border-transparent hover:border-gray-100">
-                        <div class="pl-4 pr-2">
-                            <span class="material-symbols-outlined text-gray-400">search</span>
+                    <div class="relative w-full shadow-lg shadow-orange-500/10 rounded-2xl group transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/15 bg-white p-2 flex items-center border border-gray-100">
+                        <div class="pl-3 pr-2">
+                            <span class="material-symbols-outlined text-primary-rust/80">search</span>
                         </div>
                         <input 
                             type="text" 
                             id="search-input-hero"
                             placeholder="Search for 'Biryani' or 'Rolls'..." 
-                            class="w-full bg-transparent border-none focus:ring-0 text-base font-medium text-ink placeholder-gray-400 outline-none h-10 font-body flex-1"
+                            class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium text-ink placeholder-gray-300 outline-none h-12 font-body flex-1"
                             oninput="handleSearch(this.value)"
                         >
                         
-                        <div class="flex items-center gap-1 pr-1">
-                            <button onclick="toggleFilterPanel()" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors relative group/filter" title="Filter">
-                                <span class="material-symbols-outlined text-gray-500 group-hover/filter:text-primary-rust text-[20px]">tune</span>
-                                <div id="filter-dot-desktop" class="hidden absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-primary-rust rounded-full ring-1 ring-white"></div>
-                            </button>
-
-                            <button class="bg-primary-rust hover:bg-primary-dark text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-orange-500/30 transition-all active:scale-95">
-                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                        <div class="flex items-center gap-2 pr-1 border-l border-gray-100 pl-2">
+                            <button onclick="toggleFilterPanel()" class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-orange-50 transition-colors relative group/filter" title="Filter">
+                                <span class="material-symbols-outlined text-gray-400 group-hover/filter:text-primary-rust text-[24px]">tune</span>
+                                <div id="filter-dot-desktop" class="hidden absolute top-2 right-2.5 w-2 h-2 bg-primary-rust rounded-full ring-2 ring-white"></div>
                             </button>
                         </div>
                     </div>
@@ -205,54 +217,93 @@
                 </div>
             </section>
 
+            <div class="py-2">
+                 <div class="flex items-center justify-between mb-4 px-1">
+                    <h2 class="text-lg font-bold text-ink tracking-tight font-heading">What's on your mind?</h2>
+                     <div class="flex gap-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 cursor-not-allowed"><span class="material-symbols-outlined text-sm">arrow_back</span></div>
+                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600"><span class="material-symbols-outlined text-sm">arrow_forward</span></div>
+                    </div>
+                </div>
+                <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
+                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Burger.png" class="w-full aspect-square object-contain">
+                    </div>
+                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
+                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029856/PC_Creative%20refresh/3D_bau/banners_new/Pizza.png" class="w-full aspect-square object-contain">
+                    </div>
+                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
+                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029848/PC_Creative%20refresh/3D_bau/banners_new/Chinese.png" class="w-full aspect-square object-contain">
+                    </div>
+                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
+                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png" class="w-full aspect-square object-contain">
+                    </div>
+                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
+                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1675667625/PC_Creative%20refresh/Biryani_2.png" class="w-full aspect-square object-contain">
+                    </div>
+                </div>
+                <div class="h-px w-full bg-gray-100 my-6"></div>
+            </div>
+
             <div id="category-nav" class="py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4 px-1 hidden md:block">Browse Menu</h3>
                 <div class="flex gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 px-1 justify-start md:justify-center">
                     
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform active-tab" data-category="all">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border border-transparent group-[.active-tab]:border-primary-rust overflow-hidden">
-                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ45_EUYaZRXGCEjhoy96GfQ-qWNEHyhlw-lJ2SbWTty4i_tGRZpIHqnQWH-NpqwnV1RcFleCn_MZxX_0XPLQJd_AlPx9CpxFxazNm6-G1RttAruvA9mAv94vx7kvYcG-YMiOFkBCNtHJjDIo5U0aXT64xlpgenCGtfusvJSb9kFSIzw1cZvPhYpC_a8u50e3xP6X5hHXzcn5BOMKYMDFa0xzj6dY_dq8BGxuBdLy-XJFO7BhmQKo2hG5UKaYeFGCMc-3CVhylLgU" class="w-full h-full object-cover opacity-90 group-[.active-tab]:opacity-100">
+                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform active-tab" data-category="all">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink group-[.active-tab]:shadow-lg flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ45_EUYaZRXGCEjhoy96GfQ-qWNEHyhlw-lJ2SbWTty4i_tGRZpIHqnQWH-NpqwnV1RcFleCn_MZxX_0XPLQJd_AlPx9CpxFxazNm6-G1RttAruvA9mAv94vx7kvYcG-YMiOFkBCNtHJjDIo5U0aXT64xlpgenCGtfusvJSb9kFSIzw1cZvPhYpC_a8u50e3xP6X5hHXzcn5BOMKYMDFa0xzj6dY_dq8BGxuBdLy-XJFO7BhmQKo2hG5UKaYeFGCMc-3CVhylLgU" class="w-full h-full object-cover rounded-full opacity-90 group-[.active-tab]:opacity-100">
                         </div>
-                        <span class="text-xs md:text-sm font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">All</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">All Items</span>
                     </button>
 
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="rolls">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu4XtsPQVQmzt-oply8j5oOkLj49rQG2-Cd5sczoIoNTc099N2jy-G0avyqsFxa4oBx39r79JppJNpVccRit4LN8fO7YQCZnyU-tBxq4qxhRjjTBpRO_-ht-uEUNTanAikYyK1gX2bwVsHyEZoqwDqt3GIOPXgQdqr2fchUMIsFN9bHTdpDO5TWwSTwQhKUb2TUgNDt1QTeR8llO5TTr9XROLj2q_B5YYOQozYQBD8Vh_i24B2PLpIo2vIAHowK5BtsIP4oFdgv90" class="w-full h-full object-cover">
+                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="rolls">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu4XtsPQVQmzt-oply8j5oOkLj49rQG2-Cd5sczoIoNTc099N2jy-G0avyqsFxa4oBx39r79JppJNpVccRit4LN8fO7YQCZnyU-tBxq4qxhRjjTBpRO_-ht-uEUNTanAikYyK1gX2bwVsHyEZoqwDqt3GIOPXgQdqr2fchUMIsFN9bHTdpDO5TWwSTwQhKUb2TUgNDt1QTeR8llO5TTr9XROLj2q_B5YYOQozYQBD8Vh_i24B2PLpIo2vIAHowK5BtsIP4oFdgv90" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Rolls</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Rolls</span>
                     </button>
 
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="kebabs">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiEJd-nNkflydn5dWe2apbwEymsC7rdQ6Na4dNwBSDpat12CGtLFsje0TmgRCMKb2nwWXZzj9e3DPiiU-LU9a5tlReR3GsLPEKvN1lMrLwXpCOpQT-o2h6hqBP0xbDJ3snj6Q6g7dbLXo9wOpQjJmHzAjaeGbNcvyzmzz_D6vNPCXjbKne7G_CG0vXu9MFlEGTYP6RYWTjrEFhNmzmaIDXpnXOYCYM20VNTMZqmnEXKlnKrnpq6oSJWSf0bZITCxUGKLyIi7S7x9E" class="w-full h-full object-cover">
+                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="kebabs">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiEJd-nNkflydn5dWe2apbwEymsC7rdQ6Na4dNwBSDpat12CGtLFsje0TmgRCMKb2nwWXZzj9e3DPiiU-LU9a5tlReR3GsLPEKvN1lMrLwXpCOpQT-o2h6hqBP0xbDJ3snj6Q6g7dbLXo9wOpQjJmHzAjaeGbNcvyzmzz_D6vNPCXjbKne7G_CG0vXu9MFlEGTYP6RYWTjrEFhNmzmaIDXpnXOYCYM20VNTMZqmnEXKlnKrnpq6oSJWSf0bZITCxUGKLyIi7S7x9E" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Kebabs</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Kebabs</span>
                     </button>
 
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="biryani">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE" class="w-full h-full object-cover">
+                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="biryani">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Biryani</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Biryani</span>
                     </button>
 
-                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[72px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="desserts">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust flex items-center justify-center transition-all duration-300 overflow-hidden">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JtH1VdyHqTowcQPBewPtHmnFJhsS6uXEUwIs6lDj6fLXl4NdwMOTqgpTxIiysk5eKnVO0ohjXPHO1wTGz-ZaINTgX-dr4Wis2ZTIfGJY7KJNCD7OaRN70RJJdFkeoVWgG3ZYoE4zxYUNdE38fh8-a7n9gPFjmLioLVw-v7-Q85qeJT_LHQkqklbMQqfs9tYlcONPcTWwvvIosMQI8IpQ0qTZCUrT4ipQWhnKUU0ggb5za4KlDK-GDMlM9HqpWHez_BBwP8Z_8-8" class="w-full h-full object-cover">
+                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="desserts">
+                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-ink flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-ink overflow-hidden p-1">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JtH1VdyHqTowcQPBewPtHmnFJhsS6uXEUwIs6lDj6fLXl4NdwMOTqgpTxIiysk5eKnVO0ohjXPHO1wTGz-ZaINTgX-dr4Wis2ZTIfGJY7KJNCD7OaRN70RJJdFkeoVWgG3ZYoE4zxYUNdE38fh8-a7n9gPFjmLioLVw-v7-Q85qeJT_LHQkqklbMQqfs9tYlcONPcTWwvvIosMQI8IpQ0qTZCUrT4ipQWhnKUU0ggb5za4KlDK-GDMlM9HqpWHez_BBwP8Z_8-8" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <span class="text-xs md:text-sm font-semibold text-earth group-[.active-tab]:text-ink transition-colors font-body">Desserts</span>
+                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-ink transition-colors font-body">Desserts</span>
                     </button>
-                    
                 </div>
+            </div>
+
+             <div class="w-full bg-gradient-to-r from-orange-50 to-orange-100 rounded-2xl p-6 md:p-8 flex items-center justify-between mb-8 relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">Limited Time Offer</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-ink mb-1">Flat 20% OFF</h2>
+                    <p class="text-earth text-sm mb-4">On all Kebabs & Biryani orders above ₹199</p>
+                    <button class="px-4 py-2 bg-white text-orange-600 font-bold rounded-lg text-sm shadow-sm cursor-default">Use Code: ZWIGATO20</button>
+                </div>
+                <div class="absolute -right-10 -bottom-20 w-64 h-64 bg-white/40 rounded-full blur-2xl"></div>
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE" class="w-32 h-32 md:w-48 md:h-48 object-cover rounded-full shadow-lg rotate-12 relative z-10 border-4 border-white/50">
             </div>
 
             <section class="pb-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold text-ink tracking-tight font-heading">Popular now</h2>
+                    <h2 class="text-xl font-bold text-ink tracking-tight font-heading">Recommended for you</h2>
                     <span id="search-count" class="text-sm font-medium text-earth hidden"></span>
                 </div>
                 
-                <div id="menu-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+                <div id="menu-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                     </div>
                 
                 <div id="no-results" class="hidden flex-col items-center justify-center py-12 text-center">
@@ -263,21 +314,25 @@
             </section>
         </main>
 
-        <div id="cart-bar" style="transform: translateY(200%)" class="fixed bottom-[90px] left-1/2 -translate-x-1/2 w-[95%] max-w-md z-30 transition-transform duration-500">
+        <div id="cart-bar" style="transform: translateY(200%)" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 transition-transform duration-300 ease-out">
             <div onclick="showCart()"
-                class="bg-ink text-white p-3 pr-4 rounded-2xl shadow-xl flex items-center justify-between transform transition-transform hover:-translate-y-1 cursor-pointer border border-gray-800/50 backdrop-blur-xl">
-                <div class="flex flex-col pl-2">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 font-body">Item Total</span>
+                class="bg-[#60b246] hover:bg-[#539e3d] text-white p-3 px-5 rounded-xl shadow-float flex items-center justify-between cursor-pointer group active:scale-[0.99] transition-all">
+                
+                <div class="flex flex-col">
                     <div class="flex items-baseline gap-2">
-                        <span id="cart-count" class="font-bold text-base font-body">0 Items</span>
-                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                        <span id="cart-total" class="font-bold text-base font-body">₹0</span>
+                         <span id="cart-count" class="font-extrabold text-sm uppercase tracking-wide">0 ITEMS</span>
+                         <span class="opacity-60 text-xs">|</span>
+                         <span id="cart-total" class="font-extrabold text-base">₹0</span>
+                    </div>
+                    <span class="text-[10px] font-medium opacity-90">From Zwigato Kitchen</span>
+                </div>
+
+                <div class="flex items-center gap-2 font-bold text-sm uppercase tracking-wide">
+                    View Cart
+                    <div class="bg-white/20 rounded-full p-1">
+                        <span class="material-symbols-outlined text-[16px] block">shopping_bag</span>
                     </div>
                 </div>
-                <button class="bg-primary-rust hover:bg-primary-dark text-white px-4 py-2 rounded-xl font-bold text-sm tracking-wide transition-colors flex items-center gap-2 shadow-lg shadow-orange-500/20 font-body">
-                    View Cart
-                    <span class="material-symbols-outlined text-[16px]">shopping_bag</span>
-                </button>
             </div>
         </div>
 
@@ -351,14 +406,14 @@
         <div class="fixed bottom-0 left-0 w-full z-40 bg-white border-t border-gray-100 p-4 pb-6 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
             <div class="max-w-md mx-auto">
                 <button onclick="showCheckout()"
-                    class="w-full group relative bg-primary-rust hover:bg-primary-dark text-white font-bold text-base py-3.5 px-6 rounded-2xl shadow-lg shadow-orange-500/20 flex items-center justify-between transition-all active:scale-[0.98]">
+                    class="w-full group relative bg-[#60b246] hover:bg-[#539e3d] text-white font-bold text-base py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-between transition-all active:scale-[0.98]">
                     <div class="flex flex-col items-start pl-1">
                         <span class="text-[10px] uppercase tracking-wider opacity-90 font-semibold mb-[-2px] font-body">Total</span>
                         <span id="cart-footer-total" class="text-lg font-bold font-heading">₹0</span>
                     </div>
                     <div class="flex items-center gap-2 pr-1">
                         <span class="text-sm font-bold tracking-tight font-body">Review & Pay</span>
-                        <div class="bg-white/10 rounded-full p-1 group-hover:bg-white/20 transition-colors">
+                        <div class="bg-white/20 rounded-full p-1 transition-colors">
                             <span class="material-symbols-outlined text-[20px] block">arrow_forward</span>
                         </div>
                     </div>
@@ -994,7 +1049,7 @@
 
             if (totalQty > 0) {
                 cartBar.classList.remove('translate-y-[200%]');
-                cartCount.innerText = `${totalQty} Item${totalQty > 1 ? 's' : ''}`;
+                cartCount.innerText = `${totalQty} ITEM${totalQty > 1 ? 'S' : ''}`;
                 cartTotal.innerText = `\u20B9${totalPrice}`;
             } else {
                 cartBar.classList.add('translate-y-[200%]');
