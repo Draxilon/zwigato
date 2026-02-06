@@ -134,10 +134,12 @@
 
     <div id="view-home" class="transition-opacity duration-300">
         
-        <header class="sticky top-0 z-40 bg-hero-pattern/95 backdrop-blur-md pt-2 pb-2 transition-all duration-300 border-b border-orange-100/50">
+        <!-- HEADER: Blended with Hero (Solid color matching hero top) -->
+        <header class="sticky top-0 z-40 bg-[#FFF0EB] pt-2 pb-2 transition-all duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-14">
                     
+                    <!-- Left: Logo & Location Hint -->
                     <div class="flex items-center gap-4">
                         <div class="zwigato-logo text-2xl text-ink leading-normal cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
                             Zwigato<span class="text-primary-rust">.</span>
@@ -149,6 +151,7 @@
                         </div>
                     </div>
 
+                    <!-- Right: Mode Selector -->
                     <div class="flex items-center gap-3">
                         <div class="relative z-50 group" id="mode-selector-wrapper">
                             <button onclick="toggleModeDropdown(event)" id="mode-trigger" 
@@ -180,10 +183,12 @@
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 pb-20">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 pb-20">
             
+            <!-- HERO SECTION: Unified block with Header -->
             <section class="pt-6 pb-2 md:pt-12 md:pb-8 relative">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-full bg-gradient-to-b from-[#FFF0EB] to-transparent -z-10 rounded-b-[50%] opacity-60"></div>
+                <!-- Background decorative element extended to match header -->
+                <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[150%] h-[140%] bg-gradient-to-b from-[#FFF0EB] to-transparent -z-10 rounded-b-[50%] opacity-100"></div>
 
                 <div class="flex flex-col items-center text-center max-w-2xl mx-auto">
                     <span class="text-[10px] font-bold tracking-widest text-primary-rust uppercase mb-3 bg-white px-3 py-1 rounded-full shadow-sm">No.1 in Town</span>
@@ -192,6 +197,7 @@
                         <span class="text-gradient">absolutely love.</span>
                     </h1>
                     
+                    <!-- Search Input -->
                     <div class="relative w-full shadow-lg shadow-orange-500/10 rounded-2xl group transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/15 bg-white p-2 flex items-center border border-gray-100">
                         <div class="pl-3 pr-2">
                             <span class="material-symbols-outlined text-primary-rust/80">search</span>
@@ -204,6 +210,7 @@
                             oninput="handleSearch(this.value)"
                         >
                         
+                        <!-- Filter Button Inline -->
                         <div class="flex items-center gap-2 pr-1 border-l border-gray-100 pl-2">
                             <button onclick="toggleFilterPanel()" class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-orange-50 transition-colors relative group/filter" title="Filter">
                                 <span class="material-symbols-outlined text-gray-400 group-hover/filter:text-primary-rust text-[24px]">tune</span>
@@ -212,41 +219,14 @@
                         </div>
                     </div>
                     
+                    <!-- Hidden inputs -->
                     <input type="hidden" id="search-input-desktop">
                     <input type="hidden" id="search-input-mobile">
                 </div>
             </section>
 
-            <div class="py-2">
-                 <div class="flex items-center justify-between mb-4 px-1">
-                    <h2 class="text-lg font-bold text-ink tracking-tight font-heading">What's on your mind?</h2>
-                     <div class="flex gap-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 cursor-not-allowed"><span class="material-symbols-outlined text-sm">arrow_back</span></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600"><span class="material-symbols-outlined text-sm">arrow_forward</span></div>
-                    </div>
-                </div>
-                <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
-                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
-                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Burger.png" class="w-full aspect-square object-contain">
-                    </div>
-                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
-                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029856/PC_Creative%20refresh/3D_bau/banners_new/Pizza.png" class="w-full aspect-square object-contain">
-                    </div>
-                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
-                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029848/PC_Creative%20refresh/3D_bau/banners_new/Chinese.png" class="w-full aspect-square object-contain">
-                    </div>
-                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
-                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png" class="w-full aspect-square object-contain">
-                    </div>
-                     <div class="shrink-0 w-28 md:w-36 flex flex-col items-center gap-2 cursor-default opacity-90 hover:opacity-100 transition-opacity">
-                        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1675667625/PC_Creative%20refresh/Biryani_2.png" class="w-full aspect-square object-contain">
-                    </div>
-                </div>
-                <div class="h-px w-full bg-gray-100 my-6"></div>
-            </div>
-
-            <div id="category-nav" class="py-2 -mx-4 px-4 sm:mx-0 sm:px-0">
-                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4 px-1 hidden md:block">Browse Menu</h3>
+            <!-- CATEGORY NAV: The Primary Navigation -->
+            <div id="category-nav" class="py-4 -mx-4 px-4 sm:mx-0 sm:px-0">
                 <div class="flex gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 px-1 justify-start md:justify-center">
                     
                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform active-tab" data-category="all">
@@ -286,25 +266,16 @@
                 </div>
             </div>
 
-             <div class="w-full bg-gradient-to-r from-orange-50 to-orange-100 rounded-2xl p-6 md:p-8 flex items-center justify-between mb-8 relative overflow-hidden">
-                <div class="relative z-10">
-                    <span class="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">Limited Time Offer</span>
-                    <h2 class="text-2xl md:text-3xl font-extrabold text-ink mb-1">Flat 20% OFF</h2>
-                    <p class="text-earth text-sm mb-4">On all Kebabs & Biryani orders above ₹199</p>
-                    <button class="px-4 py-2 bg-white text-orange-600 font-bold rounded-lg text-sm shadow-sm cursor-default">Use Code: ZWIGATO20</button>
-                </div>
-                <div class="absolute -right-10 -bottom-20 w-64 h-64 bg-white/40 rounded-full blur-2xl"></div>
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE" class="w-32 h-32 md:w-48 md:h-48 object-cover rounded-full shadow-lg rotate-12 relative z-10 border-4 border-white/50">
-            </div>
-
+            <!-- MENU GRID: No Header, Direct Access -->
             <section class="pb-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold text-ink tracking-tight font-heading">Recommended for you</h2>
-                    <span id="search-count" class="text-sm font-medium text-earth hidden"></span>
+                <div class="flex items-center justify-between mb-4 px-1">
+                    <!-- Clean layout: only show count if needed, no "Recommended" title -->
+                    <span id="search-count" class="text-sm font-bold text-primary-rust hidden"></span>
                 </div>
                 
                 <div id="menu-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                    </div>
+                    <!-- Cards injected by JS -->
+                </div>
                 
                 <div id="no-results" class="hidden flex-col items-center justify-center py-12 text-center">
                     <span class="material-symbols-outlined text-4xl text-gray-300 mb-2">search_off</span>
@@ -314,6 +285,7 @@
             </section>
         </main>
 
+        <!-- CART FLOATING BAR -->
         <div id="cart-bar" style="transform: translateY(200%)" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 transition-transform duration-300 ease-out">
             <div onclick="showCart()"
                 class="bg-[#60b246] hover:bg-[#539e3d] text-white p-3 px-5 rounded-xl shadow-float flex items-center justify-between cursor-pointer group active:scale-[0.99] transition-all">
@@ -358,6 +330,7 @@
         </nav>
     </div> 
 
+    <!-- CART & CHECKOUT VIEWS (Functionality Preserved) -->
     <div id="view-cart" class="fixed inset-0 z-[60] bg-cream hidden flex flex-col h-full overflow-hidden animate-slideUp">
         <header class="sticky top-0 z-50 bg-white px-4 py-4 flex items-center justify-between border-b border-gray-100 shadow-sm">
             <button onclick="goHome()" class="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors active:scale-95 text-ink">
