@@ -1,1326 +1,506 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zwigato | Food Delivery</title>
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI2IiBmaWxsPSIjRkZGRkZGIi8+CiAgPHRleHQgeD0iMTYiIHk9IjI0IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRjUyMDAiPlo8L3RleHQ+Cjwvc3ZnPg==">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zwigato - Your Cart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        'primary-rust': '#FF5200',
-                        'primary-dark': '#E64A00',
-                        'paper': '#FFFFFF',
-                        'ink': '#02060C',
-                        'cream': '#F9F9FB',
-                        'gold': '#E2E3E7',
-                        'earth': '#5B5F65',
-                        'success': '#34C759', // Swiggy Green
-                        'info': '#0A66C2',
-                        'brand-bg': '#FFF0EB'
+                        primary: "#FF5200", // Zwigato Orange
+                        "primary-dark": "#D93600",
+                        "background-light": "#F9FAFB", // Very light gray/white
+                        "background-dark": "#121212", // Dark mode background
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E1E1E",
+                        "border-light": "#F3F4F6",
+                        "border-dark": "#333333",
+                        "text-main-light": "#111827",
+                        "text-main-dark": "#F9FAFB",
+                        "text-sec-light": "#6B7280",
+                        "text-sec-dark": "#9CA3AF",
+                        "accent-green-bg": "#E6F7EB",
+                        "accent-green-text": "#0F8538",
+                        "accent-orange-bg": "#FFF0E6",
+                        "accent-orange-text": "#FF5200",
+                        "accent-blue-bg": "#EBF5FF",
+                        "accent-blue-text": "#1E429F",
+                        "ink": "#1F2937",
                     },
                     fontFamily: {
-                        'display': ["Plus Jakarta Sans", "Inter", "sans-serif"],
-                        'heading': ["Plus Jakarta Sans", "Inter", "sans-serif"],
-                        'body': ["Inter", "sans-serif"]
+                        display: ["'Plus Jakarta Sans'", "sans-serif"],
+                        sans: ["'Plus Jakarta Sans'", "sans-serif"],
+                        inter: ["'Inter'", "sans-serif"],
                     },
                     borderRadius: {
-                        'xl': '12px',
-                        '2xl': '20px',
-                        '3xl': '24px',
-                        'pill': '999px',
+                        DEFAULT: "1rem", // Rounded-2xl
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
                     },
                     boxShadow: {
-                        'soft': '0 8px 24px rgba(0,0,0,0.04)',
-                        'hover': '0 12px 32px rgba(0,0,0,0.08)',
-                        'nav': '0 -4px 20px rgba(0,0,0,0.03)',
-                        'float': '0 10px 40px -10px rgba(0,0,0,0.2)'
-                    },
-                    backgroundImage: {
-                        'hero-pattern': "linear-gradient(to bottom, #FFF0EB 0%, #FFFFFF 100%)",
-                        'shimmer': "linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent)"
-                    },
-                    animation: {
-                        'dropdown-enter': 'dropdownEnter 0.2s ease-out forwards',
-                        'fade': 'fade 0.2s ease-out',
-                        'slideDown': 'slideDown 0.3s ease-out forwards',
-                        'slideUp': 'slideUp 0.3s ease-out forwards',
-                    },
-                    keyframes: {
-                        dropdownEnter: {
-                            '0%': { opacity: '0', transform: 'translateY(-10px) scale(0.98)' },
-                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
-                        },
-                        fade: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideDown: {
-                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(100%)' },
-                            '100%': { transform: 'translateY(0)' },
-                        }
+                        'subtle': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        'float': '0 4px 20px -2px rgba(0, 0, 0, 0.1)',
+                        'dropdown': '0 10px 40px -10px rgba(0,0,0,0.08)',
                     }
-                }
-            }
-        }
+                },
+            },
+        };
     </script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --c-cream: #F9F9FB;
-            --c-paper: #FFFFFF;
-            --c-rust: #FF5200;
-            --c-ink: #02060C;
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        /* FIX: Applied global overflow-x-hidden to html to prevent horizontal scroll 
-           caused by decorative background elements.
-        */
-        html {
-            overflow-x: hidden;
-            width: 100%;
+        ::-webkit-scrollbar-track {
+            background: transparent;
         }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--c-cream);
-            color: var(--c-ink);
-            -webkit-font-smoothing: antialiased;
-            /* FIX: Removed padding-bottom: 120px to eliminate the white gap below footer. 
-               Spacing is now handled inside the footer. */
-            padding-bottom: 0; 
-            overflow-x: hidden;
-            width: 100%;
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
         }
-
-        h1, h2, h3, .font-heading {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            letter-spacing: -0.02em;
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #475569;
         }
-
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
         }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .dark .glass-header {
+            background: rgba(30, 30, 30, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        .zwigato-logo {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            font-style: italic;
+        .dropdown-group.active .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            visibility: visible;
         }
-
-        .filled-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        .dropdown-group.active .group-focus\:rotate-180 {
+             transform: rotate(180deg);
         }
-
-        /* Swiggy-like gradient text */
-        .text-gradient {
-            background: linear-gradient(90deg, #FF5200 0%, #FF8A00 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .item-card.z-active {
+            z-index: 50 !important;
+        }
+        .section-group.z-priority {
+            z-index: 50 !important;
+            position: relative;
         }
     </style>
 </head>
-
-<body class="antialiased text-ink font-body" onclick="handleBodyClick(event)">
-
-    <div id="view-home" class="transition-opacity duration-300 w-full">
-        
-        <!-- HEADER: Liquid Glass Effect on Scroll -->
-        <header id="main-header" class="sticky top-0 z-40 bg-[#FFF0EB] pt-2 pb-2 transition-all duration-300 border-b border-transparent">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-14">
-                    
-                    <!-- Left: Logo & Location Stack -->
-                    <div class="flex flex-col items-start -space-y-0.5">
-                        <div class="zwigato-logo text-2xl text-ink leading-normal cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                            Zwigato<span class="text-primary-rust">.</span>
-                        </div>
-                        
-                        <!-- Location Dropdown -->
-                        <div class="relative z-[60]">
-                            <button onclick="toggleLocationDropdown(event)" id="location-trigger" class="flex items-center gap-0.5 group cursor-pointer active:scale-95 transition-transform">
-                                <span id="current-location" class="text-[11px] font-bold text-earth group-hover:text-primary-rust transition-colors">Lucknow, India</span>
-                                <span id="location-chevron" class="material-symbols-outlined text-[14px] text-earth group-hover:text-primary-rust transition-colors transition-transform duration-200">expand_more</span>
-                            </button>
-
-                            <div id="location-dropdown" class="absolute top-full left-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 hidden origin-top-left overflow-hidden">
-                                <div class="p-1">
-                                    <div class="px-3 py-2 text-[10px] uppercase font-bold text-gray-400 tracking-widest border-b border-gray-50 mb-1">Select Branch</div>
-                                    <button onclick="updateLocation('Lucknow, India')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Lucknow, India</button>
-                                    <button onclick="updateLocation('Indira Nagar')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Indira Nagar</button>
-                                    <button onclick="updateLocation('Gomti Nagar')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Gomti Nagar</button>
-                                    <button onclick="updateLocation('Hazratganj')" class="w-full text-left px-3 py-2 hover:bg-orange-50 rounded-xl text-xs font-bold text-ink hover:text-primary-rust transition-colors">Hazratganj</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Mode Selector -->
-                    <div class="flex items-center gap-3">
-                        <div class="relative z-50 group" id="mode-selector-wrapper">
-                            <button onclick="toggleModeDropdown(event)" id="mode-trigger" 
-                                class="flex items-center gap-2 bg-white hover:bg-orange-50 active:bg-orange-100 border border-gray-200/50 rounded-full px-3 py-1.5 shadow-sm transition-all duration-200 ring-1 ring-gray-100">
-                                <span id="trigger-icon" class="material-symbols-outlined text-primary-rust text-[18px]">two_wheeler</span>
-                                <span id="trigger-label" class="text-xs font-bold text-ink leading-none">Delivery</span>
-                                <span id="trigger-chevron" class="material-symbols-outlined text-gray-400 text-[18px]">expand_more</span>
-                            </button>
-
-                            <div id="mode-dropdown" class="absolute top-full right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 hidden origin-top-right overflow-hidden z-[60]">
-                                <div class="p-2 space-y-1">
-                                    <button onclick="setGlobalOrderMode('Delivery')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group text-left">
-                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">two_wheeler</span>
-                                        <span class="text-sm font-bold text-ink group-hover:text-primary-rust">Delivery</span>
-                                    </button>
-                                    <button onclick="setGlobalOrderMode('Pickup')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group text-left">
-                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">shopping_bag</span>
-                                        <span class="text-sm font-bold text-ink group-hover:text-primary-rust">Pickup</span>
-                                    </button>
-                                    <button onclick="setGlobalOrderMode('Dine-in')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group text-left">
-                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">restaurant</span>
-                                        <span class="text-sm font-bold text-ink group-hover:text-primary-rust">Dine-in</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-            
-            <!-- HERO SECTION -->
-            <section class="pt-6 pb-2 md:pt-12 md:pb-8 relative">
-                <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[150%] h-[140%] bg-gradient-to-b from-[#FFF0EB] to-transparent -z-10 rounded-b-[50%] opacity-100"></div>
-
-                <div class="flex flex-col items-center text-center max-w-2xl mx-auto">
-                    <span class="text-[10px] font-bold tracking-widest text-primary-rust uppercase mb-3 bg-white px-3 py-1 rounded-full shadow-sm">No.1 in Town</span>
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] text-ink tracking-tight mb-8 font-heading">
-                        Order food you<br>
-                        <span class="text-gradient">absolutely love.</span>
-                    </h1>
-                    
-                    <!-- Search Input -->
-                    <div class="relative w-full shadow-lg shadow-orange-500/10 rounded-2xl group transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/15 bg-white p-2 flex items-center border border-gray-100">
-                        <div class="pl-3 pr-2">
-                            <span class="material-symbols-outlined text-primary-rust/80">search</span>
-                        </div>
-                        <input 
-                            type="text" 
-                            id="search-input-hero"
-                            placeholder="Search for 'Biryani' or 'Rolls'..." 
-                            class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium text-ink placeholder-gray-300 outline-none h-12 font-body flex-1"
-                            oninput="handleSearch(this.value)"
-                        >
-                        
-                        <!-- Filter Button Inline -->
-                        <div class="flex items-center gap-2 pr-1 border-l border-gray-100 pl-2">
-                            <button onclick="toggleFilterPanel()" class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-orange-50 transition-colors relative group/filter" title="Filter">
-                                <span class="material-symbols-outlined text-gray-400 group-hover/filter:text-primary-rust text-[24px]">tune</span>
-                                <div id="filter-dot-desktop" class="hidden absolute top-2 right-2.5 w-2 h-2 bg-primary-rust rounded-full ring-2 ring-white"></div>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Hidden inputs -->
-                    <input type="hidden" id="search-input-desktop">
-                    <input type="hidden" id="search-input-mobile">
-                </div>
-            </section>
-
-            <!-- CATEGORY NAV: Primary Color Update -->
-            <div id="category-nav" class="py-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-                <div class="flex gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 px-1 justify-start md:justify-center">
-                    
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform active-tab" data-category="all">
-                        <!-- Replaced active bg-ink with bg-primary-rust -->
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
-                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ45_EUYaZRXGCEjhoy96GfQ-qWNEHyhlw-lJ2SbWTty4i_tGRZpIHqnQWH-NpqwnV1RcFleCn_MZxX_0XPLQJd_AlPx9CpxFxazNm6-G1RttAruvA9mAv94vx7kvYcG-YMiOFkBCNtHJjDIo5U0aXT64xlpgenCGtfusvJSb9kFSIzw1cZvPhYpC_a8u50e3xP6X5hHXzcn5BOMKYMDFa0xzj6dY_dq8BGxuBdLy-XJFO7BhmQKo2hG5UKaYeFGCMc-3CVhylLgU" class="w-full h-full object-cover rounded-full opacity-90 group-[.active-tab]:opacity-100">
-                        </div>
-                        <!-- Replaced active text-ink with text-primary-rust -->
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">All Items</span>
-                    </button>
-
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="rolls">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu4XtsPQVQmzt-oply8j5oOkLj49rQG2-Cd5sczoIoNTc099N2jy-G0avyqsFxa4oBx39r79JppJNpVccRit4LN8fO7YQCZnyU-tBxq4qxhRjjTBpRO_-ht-uEUNTanAikYyK1gX2bwVsHyEZoqwDqt3GIOPXgQdqr2fchUMIsFN9bHTdpDO5TWwSTwQhKUb2TUgNDt1QTeR8llO5TTr9XROLj2q_B5YYOQozYQBD8Vh_i24B2PLpIo2vIAHowK5BtsIP4oFdgv90" class="w-full h-full object-cover rounded-full">
-                        </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Rolls</span>
-                    </button>
-
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="kebabs">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiEJd-nNkflydn5dWe2apbwEymsC7rdQ6Na4dNwBSDpat12CGtLFsje0TmgRCMKb2nwWXZzj9e3DPiiU-LU9a5tlReR3GsLPEKvN1lMrLwXpCOpQT-o2h6hqBP0xbDJ3snj6Q6g7dbLXo9wOpQjJmHzAjaeGbNcvyzmzz_D6vNPCXjbKne7G_CG0vXu9MFlEGTYP6RYWTjrEFhNmzmaIDXpnXOYCYM20VNTMZqmnEXKlnKrnpq6oSJWSf0bZITCxUGKLyIi7S7x9E" class="w-full h-full object-cover rounded-full">
-                        </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Kebabs</span>
-                    </button>
-
-                    <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="biryani">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE" class="w-full h-full object-cover rounded-full">
-                        </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Biryani</span>
-                    </button>
-
-                     <button class="category-btn group flex flex-col items-center gap-2 md:gap-3 min-w-[80px] shrink-0 focus:outline-none active:scale-95 transition-transform" data-category="desserts">
-                        <div class="w-[72px] h-[72px] md:w-24 md:h-24 rounded-full bg-white shadow-soft group-[.active-tab]:bg-primary-rust group-[.active-tab]:shadow-lg shadow-orange-500/20 flex items-center justify-center transition-all duration-300 border-2 border-transparent group-[.active-tab]:border-primary-rust overflow-hidden p-1">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JtH1VdyHqTowcQPBewPtHmnFJhsS6uXEUwIs6lDj6fLXl4NdwMOTqgpTxIiysk5eKnVO0ohjXPHO1wTGz-ZaINTgX-dr4Wis2ZTIfGJY7KJNCD7OaRN70RJJdFkeoVWgG3ZYoE4zxYUNdE38fh8-a7n9gPFjmLioLVw-v7-Q85qeJT_LHQkqklbMQqfs9tYlcONPcTWwvvIosMQI8IpQ0qTZCUrT4ipQWhnKUU0ggb5za4KlDK-GDMlM9HqpWHez_BBwP8Z_8-8" class="w-full h-full object-cover rounded-full">
-                        </div>
-                        <span class="text-xs md:text-sm font-bold text-earth group-[.active-tab]:text-primary-rust transition-colors font-body">Desserts</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- MENU GRID: No Header, Direct Access -->
-            <section class="pb-6">
-                <div class="flex items-center justify-between mb-4 px-1">
-                    <!-- Clean layout: only show count if needed, no "Recommended" title -->
-                    <span id="search-count" class="text-sm font-bold text-primary-rust hidden"></span>
-                </div>
-                
-                <div id="menu-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                    <!-- Cards injected by JS -->
-                </div>
-                
-                <div id="no-results" class="hidden flex-col items-center justify-center py-12 text-center">
-                    <span class="material-symbols-outlined text-4xl text-gray-300 mb-2">search_off</span>
-                    <p class="text-earth font-medium">No dishes found matching your search.</p>
-                    <button onclick="clearSearch()" class="mt-4 text-primary-rust font-bold hover:underline">Clear Search</button>
-                </div>
-            </section>
-        </main>
-
-        <!-- REIMAGINED FOOTER -->
-        <!-- FIX: Added pb-28 md:pb-32 to footer to provide space for floating elements 
-             while maintaining background continuity. Replaces body padding. -->
-        <footer class="relative pt-20 pb-28 md:pb-32 overflow-hidden">
-            <!-- Smooth Gradient Background: Matched Hero Logic (Inverted) & Enhanced for Smoothness -->
-            <!-- Matched hero logic: Inverted top/bottom classes, removed 'mt-10' to close gap, smooth gradient to transparent -->
-            <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[150%] h-[140%] bg-gradient-to-t from-[#FFF0EB] to-transparent -z-10 rounded-t-[50%] opacity-100"></div>
-            
-            <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-                <!-- Main Headline -->
-                <h2 class="text-4xl md:text-6xl font-extrabold text-ink font-heading tracking-tight mb-6 leading-[1.1]">
-                    Your meal,<br class="md:hidden"> <span class="text-primary-rust">done right.</span>
-                </h2>
-                
-                <!-- Subheadline -->
-                <p class="text-earth text-base md:text-lg font-medium mb-8 font-body max-w-sm md:max-w-lg mx-auto leading-relaxed">
-                    Cooked fresh in our kitchen and delivered straight to your door in minutes.
-                </p>
-                
-                <!-- CTA Button -->
-                <button onclick="window.scrollTo({top:0, behavior:'smooth'}); document.getElementById('search-input-hero').focus();" 
-                    class="bg-primary-rust hover:bg-primary-dark text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-orange-500/20 hover:shadow-orange-500/30 active:scale-95 transition-all duration-200 font-heading inline-flex items-center gap-2 group">
-                    Order Now
-                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-[24px]">arrow_forward</span>
-                </button>
-                
-                <!-- Brand Anchor -->
-                <div class="mt-12 mb-4 select-none opacity-20">
-                    <span class="zwigato-logo text-6xl md:text-8xl text-ink tracking-tighter">Zwigato.</span>
-                </div>
-                 <p class="text-[10px] text-earth/60 font-bold tracking-[0.2em] uppercase">© 2026 Zwigato. All rights reserved.</p>
-            </div>
-        </footer>
-
-        <!-- CART FLOATING BAR -->
-        <div id="cart-bar" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 transition-transform duration-300 ease-out translate-y-[200%]">
-            <div onclick="showCart()"
-                class="bg-[#60b246] hover:bg-[#539e3d] text-white p-3 px-5 rounded-xl shadow-float flex items-center justify-between cursor-pointer group active:scale-[0.99] transition-all">
-                
-                <div class="flex flex-col">
-                    <div class="flex items-baseline gap-2">
-                         <span id="cart-count" class="font-extrabold text-sm uppercase tracking-wide">0 ITEMS</span>
-                         <span class="opacity-60 text-xs">|</span>
-                         <span id="cart-total" class="font-extrabold text-base">₹0</span>
-                    </div>
-                    <span class="text-[10px] font-medium opacity-90">From Zwigato Kitchen</span>
-                </div>
-
-                <div class="flex items-center gap-2 font-bold text-sm uppercase tracking-wide">
-                    View Cart
-                    <div class="bg-white/20 rounded-full p-1">
-                        <span class="material-symbols-outlined text-[16px] block">shopping_bag</span>
-                    </div>
-                </div>
-            </div>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-main-light dark:text-text-main-dark transition-colors duration-300 antialiased min-h-screen pb-32 md:pb-32">
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-8 space-y-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="history.back()">
+<span class="material-symbols-outlined text-2xl text-gray-900 dark:text-white">arrow_back</span>
+</button>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white">Your Cart</h1>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl border border-gray-100 dark:border-border-dark overflow-visible transition-colors shadow-sm relative z-20 section-group" id="section-delivery">
+<div class="p-6 border-b border-gray-100 dark:border-border-dark flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 shrink-0">
+<span class="material-symbols-outlined">two_wheeler</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Delivery Items</h2>
+<p class="text-sm text-text-sec-light dark:text-text-sec-dark">Delivered to Home</p>
+</div>
+</div>
+<div class="items-container">
+<div class="item-card p-4 sm:p-6 flex gap-4 sm:gap-6 border-b border-gray-100 dark:border-border-dark last:border-0 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors overflow-visible relative items-center z-10" data-id="sushi">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 relative">
+<img alt="Sushi Platter" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM30JYHSjtHnPyRZBNmPgakfvfD_mQFdVJm_UdjaUilaGyl2-Dfw7B6QrnIEzjhnoaNqmJuiuvsUXoMJXK--AArOBhc9Vyh7E4bMeYWk8WO-6rXYPhCI1bQ6p5RAVJJcxy3sRWm4FOBvkIGz0tytRDVcDDuEpKup8XAreN5uEMJy44u653WveEL92EvICeSLYjwVbX0fOoxdU1EVYE94nFZJE9EVd_kOXBz5WLNcDihQQ29ZbkHMsQTxqlp8729hyBpTFVlXNV2T5s"/>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate pr-2">Sushi Platter</h3>
+<span class="text-lg font-bold text-gray-900 dark:text-white shrink-0">₹24.00</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+<div class="flex items-center gap-2 flex-wrap relative z-30">
+<div class="relative dropdown-group font-inter">
+<button class="trigger-btn flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-full transition-colors group cursor-pointer border ring-1 ring-gray-100 dark:ring-gray-700 shadow-sm border-transparent focus:border-primary/30 outline-none" onclick="toggleDropdown(this)">
+<span class="material-symbols-outlined text-[18px] text-[#FF5200] icon-display">two_wheeler</span>
+<span class="text-xs font-bold text-ink dark:text-gray-200 label-display">Delivery</span>
+<span class="material-symbols-outlined text-[16px] text-gray-400 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-transform duration-200 group-focus:rotate-180">expand_more</span>
+</button>
+<div class="dropdown-menu absolute top-full left-0 mt-2 w-48 bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 opacity-0 invisible transform -translate-y-2 transition-all duration-200 z-50 origin-top-left">
+<div class="flex flex-col gap-1">
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-[#FF5200] font-bold text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'delivery')">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+                                            Delivery
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'pickup')">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                                            Pickup
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'dinein')">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+                                            Dine-in
+                                        </button>
+</div>
+</div>
+</div>
+<span class="text-sm text-text-sec-light dark:text-text-sec-dark flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-gray-400"></span> Medium Spicy</span>
+</div>
+<div class="flex items-center border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 bg-white dark:bg-surface-dark self-end sm:self-auto">
+<button class="text-gray-400 hover:text-primary transition-colors px-2" onclick="updateQuantity(this, -1)">-</button>
+<span class="font-semibold w-6 text-center text-gray-900 dark:text-white text-sm quantity-display">1</span>
+<button class="text-primary hover:text-primary-dark transition-colors px-2" onclick="updateQuantity(this, 1)">+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="item-card p-4 sm:p-6 flex gap-4 sm:gap-6 border-b border-gray-100 dark:border-border-dark last:border-0 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors overflow-visible relative items-center z-10" data-id="miso">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 relative">
+<img alt="Miso Soup" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIV2XHukpBiOR-PpSnGGSNjBZeNQazepCxstbMgRFCirf7DHy6xs-ihXO56O-XxJkTGx4Nw26o5sNHM-fOoYSqMf46KWLBDG4zyKY8uhMpKYaLXQqiCzDiUT0eKax5G25tr00j2ACD8dkZF2DF29i1epswd946CVWQTyT2q0H92xZ3-vB5ULRzaIukpFHKFCLVTXOoQGxQauOIw1-S4r4RFB61kbvJuWID25rcy0MPzUDsZP53M6RpqlQJwbKoD4NxGIFsxKTXlq-I"/>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate pr-2">Miso Soup</h3>
+<span class="text-lg font-bold text-gray-900 dark:text-white shrink-0">₹10.00</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+<div class="flex items-center gap-2 relative z-30">
+<div class="relative dropdown-group font-inter">
+<button class="trigger-btn flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-full transition-colors group cursor-pointer border ring-1 ring-gray-100 dark:ring-gray-700 shadow-sm border-transparent focus:border-primary/30 outline-none" onclick="toggleDropdown(this)">
+<span class="material-symbols-outlined text-[18px] text-[#FF5200] icon-display">two_wheeler</span>
+<span class="text-xs font-bold text-ink dark:text-gray-200 label-display">Delivery</span>
+<span class="material-symbols-outlined text-[16px] text-gray-400 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-transform duration-200 group-focus:rotate-180">expand_more</span>
+</button>
+<div class="dropdown-menu absolute top-full left-0 mt-2 w-48 bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 opacity-0 invisible transform -translate-y-2 transition-all duration-200 z-50 origin-top-left">
+<div class="flex flex-col gap-1">
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-[#FF5200] font-bold text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'delivery')">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+                                            Delivery
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'pickup')">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                                            Pickup
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'dinein')">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+                                            Dine-in
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 bg-white dark:bg-surface-dark self-end sm:self-auto">
+<button class="text-gray-400 hover:text-primary transition-colors px-2" onclick="updateQuantity(this, -1)">-</button>
+<span class="font-semibold w-6 text-center text-gray-900 dark:text-white text-sm quantity-display">2</span>
+<button class="text-primary hover:text-primary-dark transition-colors px-2" onclick="updateQuantity(this, 1)">+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl border border-gray-100 dark:border-border-dark overflow-visible transition-colors shadow-sm relative z-10 section-group" id="section-dinein">
+<div class="p-6 border-b border-gray-100 dark:border-border-dark flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 shrink-0">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Dine-in Items</h2>
+<p class="text-sm text-text-sec-light dark:text-text-sec-dark">Serve at Table</p>
+</div>
+</div>
+<div class="items-container">
+<div class="item-card p-4 sm:p-6 flex gap-4 sm:gap-6 border-b border-gray-100 dark:border-border-dark last:border-0 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors overflow-visible relative items-center z-10" data-id="coffee">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 relative">
+<img alt="Iced Coffee" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk2ylLHABpeErsi7meSsf2scx9a770q9CeqIlyYjExIPkSxuULfkhuyAoreoub4kHMARWWCB6t8A_bY9hsDba_3F73mu6dwWdRGQB7bPvFA68jmgeoaCoGGNmjLUOizicQHFJYq-6yCCz34y5QiiU-CO511UzabVfTmJDv3y15cg9gr9900qMZIqQR7Z1w-xZk3Sxw9YOMtxlLD9fZpv6s9xRVhU5nA3tMvEvO_KfSbu3nPZbQTcyapNLl7T7-bhVGVdlivXjgmI0r"/>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate pr-2">Iced Coffee</h3>
+<span class="text-lg font-bold text-gray-900 dark:text-white shrink-0">₹3.50</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+<div class="flex items-center gap-2 relative z-30">
+<div class="relative dropdown-group font-inter">
+<button class="trigger-btn flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-full transition-colors group cursor-pointer border ring-1 ring-gray-100 dark:ring-gray-700 shadow-sm border-transparent focus:border-primary/30 outline-none" onclick="toggleDropdown(this)">
+<span class="material-symbols-outlined text-[18px] text-[#FF5200] icon-display">restaurant</span>
+<span class="text-xs font-bold text-ink dark:text-gray-200 label-display">Dine-in</span>
+<span class="material-symbols-outlined text-[16px] text-gray-400 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-transform duration-200 group-focus:rotate-180">expand_more</span>
+</button>
+<div class="dropdown-menu absolute top-full left-0 mt-2 w-48 bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 opacity-0 invisible transform -translate-y-2 transition-all duration-200 z-50 origin-top-left">
+<div class="flex flex-col gap-1">
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'delivery')">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+                                            Delivery
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'pickup')">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                                            Pickup
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-[#FF5200] font-bold text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'dinein')">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+                                            Dine-in
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 bg-white dark:bg-surface-dark self-end sm:self-auto">
+<button class="text-gray-400 hover:text-primary transition-colors px-2" onclick="updateQuantity(this, -1)">-</button>
+<span class="font-semibold w-6 text-center text-gray-900 dark:text-white text-sm quantity-display">1</span>
+<button class="text-primary hover:text-primary-dark transition-colors px-2" onclick="updateQuantity(this, 1)">+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl border border-gray-100 dark:border-border-dark overflow-visible transition-colors shadow-sm relative z-10 section-group" id="section-pickup">
+<div class="p-6 border-b border-gray-100 dark:border-border-dark flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 shrink-0">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Pickup Items</h2>
+<p class="text-sm text-text-sec-light dark:text-text-sec-dark">Pick up at Counter</p>
+</div>
+</div>
+<div class="items-container">
+<div class="item-card p-4 sm:p-6 flex gap-4 sm:gap-6 border-b border-gray-100 dark:border-border-dark last:border-0 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors overflow-visible relative items-center z-10" data-id="cake">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 relative">
+<img alt="Matcha Cheesecake" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxPIywN1RYZg6xpn6gcfL1JqBlPJL6-FwsYW5je_xHdL-zh7Oksf4uQQK_6H3mrAqzoSWvZ4ecCMuXyJYZ7VDfRZVOgictgxcq9Gco0zsLpkcTp4vITLMoEL0RiqLuehYy0gI8Be0_qJymqEvUz1ijABjGC3kuJrvvwjRHStuwjnorGnJ2Cww_Bm2_bThMUJ7pK8vo6ZFZ8EFIwfbZ2yi43M34-d9HylLQ5DmOEHpa9AtcV3IT1W6jAEz9tHBOqZuuhdwoQCchx3fG"/>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate pr-2">Matcha Cheesecake</h3>
+<span class="text-lg font-bold text-gray-900 dark:text-white shrink-0">₹8.00</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+<div class="flex items-center gap-2 relative z-30">
+<div class="relative dropdown-group font-inter">
+<button class="trigger-btn flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-full transition-colors group cursor-pointer border ring-1 ring-gray-100 dark:ring-gray-700 shadow-sm border-transparent focus:border-primary/30 outline-none" onclick="toggleDropdown(this)">
+<span class="material-symbols-outlined text-[18px] text-[#FF5200] icon-display">shopping_bag</span>
+<span class="text-xs font-bold text-ink dark:text-gray-200 label-display">Pickup</span>
+<span class="material-symbols-outlined text-[16px] text-gray-400 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200 transition-transform duration-200 group-focus:rotate-180">expand_more</span>
+</button>
+<div class="dropdown-menu absolute top-full left-0 mt-2 w-48 bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 opacity-0 invisible transform -translate-y-2 transition-all duration-200 z-50 origin-top-left">
+<div class="flex flex-col gap-1">
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'delivery')">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+                                            Delivery
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-[#FF5200] font-bold text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'pickup')">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                                            Pickup
+                                        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm transition-colors text-left font-inter" onclick="moveItem(this, 'dinein')">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+                                            Dine-in
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 bg-white dark:bg-surface-dark self-end sm:self-auto">
+<button class="text-gray-400 hover:text-primary transition-colors px-2" onclick="updateQuantity(this, -1)">-</button>
+<span class="font-semibold w-6 text-center text-gray-900 dark:text-white text-sm quantity-display">1</span>
+<button class="text-primary hover:text-primary-dark transition-colors px-2" onclick="updateQuantity(this, 1)">+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl border border-gray-100 dark:border-border-dark p-6 transition-colors shadow-sm">
+<div class="flex items-center gap-2 mb-4 text-gray-900 dark:text-white font-semibold">
+<span class="material-symbols-outlined text-gray-400">edit_note</span>
+            Cooking Requests
         </div>
-
-        <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 pb-safe z-40 shadow-nav">
-            <div class="flex justify-around items-center h-[70px] px-2">
-                <button class="flex flex-col items-center justify-center w-full h-full gap-1 text-primary-rust">
-                    <span class="material-symbols-outlined filled-icon text-[26px]">home</span>
-                    <span class="text-[10px] font-bold">Home</span>
-                </button>
-                <button onclick="document.getElementById('category-nav').scrollIntoView({behavior: 'smooth'})" class="flex flex-col items-center justify-center w-full h-full gap-1 text-gray-400 hover:text-ink transition-colors">
-                    <span class="material-symbols-outlined text-[26px]">restaurant_menu</span>
-                    <span class="text-[10px] font-medium">Menu</span>
-                </button>
-                <button onclick="document.getElementById('search-input-hero').focus()" class="flex flex-col items-center justify-center w-full h-full gap-1 text-gray-400 hover:text-ink transition-colors">
-                    <span class="material-symbols-outlined text-[26px]">search</span>
-                    <span class="text-[10px] font-medium">Search</span>
-                </button>
-                <button class="flex flex-col items-center justify-center w-full h-full gap-1 text-gray-400 hover:text-ink transition-colors">
-                    <span class="material-symbols-outlined text-[26px]">help_outline</span>
-                    <span class="text-[10px] font-medium">Help</span>
-                </button>
+<textarea class="w-full bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none h-24 outline-none" placeholder="e.g. Less spicy, no cutlery, allergy info..."></textarea>
+</div>
+</div>
+<div class="lg:col-span-4 lg:relative h-full">
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl border border-gray-100 dark:border-border-dark p-6 sm:p-8 sticky top-6 lg:top-[50px] shadow-sm transition-colors lg:w-full">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Bill Details</h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-text-sec-light dark:text-text-sec-dark text-sm">
+<span>Item Total</span>
+<span class="font-medium text-gray-900 dark:text-white">₹42.00</span>
+</div>
+<div class="flex justify-between items-center text-text-sec-light dark:text-text-sec-dark text-sm">
+<span>Delivery Fee</span>
+<span class="font-bold text-primary">Free</span>
+</div>
+<div class="text-xs text-text-sec-light dark:text-text-sec-dark mt-2">
+                GST included in item prices
             </div>
-        </nav>
-    </div> 
-
-    <!-- CART & CHECKOUT VIEWS (Functionality Preserved) -->
-    <div id="view-cart" class="fixed inset-0 z-[60] bg-cream hidden flex flex-col h-full overflow-hidden animate-slideUp">
-        <header class="sticky top-0 z-50 bg-white px-4 py-4 flex items-center justify-between border-b border-gray-100 shadow-sm">
-            <button onclick="goHome()" class="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors active:scale-95 text-ink">
-                <span class="material-symbols-outlined text-[24px]">arrow_back</span>
-            </button>
-            <h1 class="text-lg font-bold text-ink flex-1 text-center pr-8 tracking-tight font-heading">Your Cart</h1>
-        </header>
-
-        <div class="flex-1 w-full max-w-md mx-auto p-4 flex flex-col gap-5 overflow-y-auto pb-40">
-            <div id="cart-items-container" class="flex flex-col gap-4"></div>
-
-            <div class="bg-white rounded-2xl p-4 shadow-soft border border-gray-100">
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="material-symbols-outlined text-earth text-[20px]">restaurant_menu</span>
-                    <label class="text-sm font-bold text-ink uppercase tracking-wide font-body">Cooking Requests</label>
-                </div>
-                <input id="order-notes"
-                    class="w-full bg-cream border border-gray-200 rounded-xl p-3.5 text-sm text-ink placeholder-gray-400 focus:ring-2 focus:ring-primary-rust focus:border-transparent transition-all outline-none font-body"
-                    placeholder="Add notes (e.g., less spicy)...">
-            </div>
-
-            <div class="bg-white rounded-2xl p-5 shadow-soft border border-gray-100">
-                <h3 class="text-xs font-bold uppercase tracking-widest text-earth mb-4 flex items-center gap-2 font-body">
-                    <span class="material-symbols-outlined text-[16px]">receipt_long</span> Bill Details
-                </h3>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center text-sm text-ink font-body">
-                        <span>Item Total</span>
-                        <span id="cart-view-subtotal">₹0</span>
-                    </div>
-                    <div class="flex justify-between items-center text-sm text-ink font-body">
-                        <span>Delivery Fee</span>
-                        <span class="text-success font-medium">FREE</span>
-                    </div>
-                </div>
-                <div class="my-4 border-t border-dashed border-gray-200"></div>
-                <div class="flex justify-between items-center">
-                    <span class="text-base font-bold text-ink font-heading">To Pay</span>
-                    <div class="text-right">
-                        <span id="cart-view-total" class="block text-xl font-bold text-primary-rust font-heading">₹0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="fixed bottom-0 left-0 w-full z-40 bg-white border-t border-gray-100 p-4 pb-6 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
-            <div class="max-w-md mx-auto">
-                <button onclick="showCheckout()"
-                    class="w-full group relative bg-[#60b246] hover:bg-[#539e3d] text-white font-bold text-base py-3.5 px-6 rounded-2xl shadow-lg flex items-center justify-between transition-all active:scale-[0.98]">
-                    <div class="flex flex-col items-start pl-1">
-                        <span class="text-[10px] uppercase tracking-wider opacity-90 font-semibold mb-[-2px] font-body">Total</span>
-                        <span id="cart-footer-total" class="text-lg font-bold font-heading">₹0</span>
-                    </div>
-                    <div class="flex items-center gap-2 pr-1">
-                        <span class="text-sm font-bold tracking-tight font-body">Review & Pay</span>
-                        <div class="bg-white/20 rounded-full p-1 transition-colors">
-                            <span class="material-symbols-outlined text-[20px] block">arrow_forward</span>
-                        </div>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="view-checkout" class="fixed inset-0 z-[70] bg-cream hidden flex flex-col h-full overflow-hidden animate-slideUp">
-        <div class="sticky top-0 z-20 flex items-center bg-white p-4 pb-4 justify-between border-b border-gray-100 shadow-sm">
-            <div onclick="showCart()"
-                class="text-ink flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
-                <span class="material-symbols-outlined text-2xl">arrow_back</span>
-            </div>
-            <h2 class="text-ink text-lg font-bold leading-tight flex-1 text-center pr-10 font-heading">Checkout</h2>
-        </div>
-
-        <div class="flex-1 overflow-y-auto pb-32 max-w-md mx-auto w-full">
-            <div class="px-5 mt-6">
-                <h2 class="text-ink text-base font-bold leading-tight mb-4 flex items-center gap-2 font-heading">
-                    <span class="material-symbols-outlined text-primary-rust">location_on</span> Delivery Details
-                </h2>
-                <div class="space-y-4">
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                            <span class="material-symbols-outlined text-[20px]">person</span>
-                        </div>
-                        <input id="input-name"
-                            class="w-full h-12 pl-12 pr-4 rounded-xl bg-white border border-gray-200 focus:border-primary-rust focus:ring-1 focus:ring-primary-rust text-ink placeholder-gray-400 shadow-sm transition-all outline-none font-medium font-body"
-                            placeholder="Your Name (Required)">
-                    </div>
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                            <span class="material-symbols-outlined text-[20px]">call</span>
-                        </div>
-                        <input id="input-phone"
-                            class="w-full h-12 pl-12 pr-4 rounded-xl bg-white border border-gray-200 focus:border-primary-rust focus:ring-1 focus:ring-primary-rust text-ink placeholder-gray-400 shadow-sm transition-all outline-none font-medium font-body"
-                            placeholder="Phone Number (Required)" type="tel">
-                    </div>
-                    <div class="relative group">
-                        <div class="absolute left-4 top-4 text-gray-400 pointer-events-none">
-                            <span class="material-symbols-outlined text-[20px]">home</span>
-                        </div>
-                        <textarea id="input-address"
-                            class="w-full min-h-[100px] pl-12 pr-4 py-3 rounded-xl bg-white border border-gray-200 focus:border-primary-rust focus:ring-1 focus:ring-primary-rust text-ink placeholder-gray-400 shadow-sm transition-all outline-none font-medium resize-none font-body"
-                            placeholder="Complete Address (House No, Building, Street, Area)"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-5 mx-5 mt-6 bg-white rounded-2xl border border-gray-100 shadow-soft">
-                <div class="flex justify-between gap-x-6 py-1">
-                    <p class="text-earth text-sm font-medium font-body">Item Total</p>
-                    <p id="checkout-subtotal" class="text-ink text-sm font-semibold text-right font-body">₹0</p>
-                </div>
-                <div class="w-full h-px bg-gray-100 my-3"></div>
-                <div class="flex justify-between gap-x-6">
-                    <p class="text-ink text-base font-bold font-heading">To Pay</p>
-                    <p id="checkout-total" class="text-primary-rust text-base font-bold text-right font-heading">
-                        ₹0
+</div>
+<div class="my-6 border-t border-dashed border-gray-200 dark:border-gray-700"></div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-lg font-bold text-gray-900 dark:text-white">Grand Total</span>
+<span class="text-2xl font-bold text-gray-900 dark:text-white">₹45.50</span>
+</div>
+<p class="text-xs text-text-sec-light dark:text-text-sec-dark mb-8">Inclusive of all taxes</p>
+</div>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 w-full bg-surface-light dark:bg-surface-dark/95 backdrop-blur-md border-t border-gray-100 dark:border-border-dark py-4 sm:py-4 z-40 transition-colors">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-0">
+<div class="flex flex-row justify-between sm:justify-start items-center sm:flex-col w-full sm:w-auto">
+<div class="flex flex-col">
+<p class="text-[10px] text-text-sec-light dark:text-text-sec-dark uppercase font-semibold tracking-wider mb-0.5">Total to Pay</p>
+<div class="flex items-baseline gap-2">
+<p class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                        4 items <span class="mx-1">·</span> ₹45.50
                     </p>
-                </div>
-            </div>
-            <div class="h-8"></div>
-        </div>
-
-        <div class="absolute bottom-0 left-0 w-full p-4 bg-white border-t border-gray-100">
-            <div class="max-w-md mx-auto">
-                <button onclick="placeOrder()"
-                    class="w-full h-12 bg-[#25D366] hover:bg-[#1ebc57] active:scale-[0.98] transition-all rounded-xl flex items-center justify-center gap-3 shadow-md group">
-                    <span class="text-white font-bold text-base font-body">Confirm via WhatsApp</span>
-                    <svg class="size-5 fill-white group-hover:rotate-12 transition-transform" viewbox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="mode-modal" class="fixed inset-0 z-[90] bg-black/60 hidden flex items-center justify-center p-4 backdrop-blur-sm animate-fade">
-        <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl scale-95 transition-transform duration-200" id="mode-modal-content">
-            <h3 class="text-xl font-bold text-ink mb-2 font-heading">Ordering for?</h3>
-            <p class="text-earth text-sm mb-6 font-body">Select how you want your food.</p>
-            
-            <div class="space-y-3">
-                <button onclick="resolveModeModal('Delivery')" class="w-full flex items-center justify-between p-4 rounded-xl border border-gray-200 hover:border-primary-rust hover:bg-orange-50 transition-all group">
-                    <span class="font-bold text-ink group-hover:text-primary-rust">Delivery</span>
-                    <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">two_wheeler</span>
-                </button>
-                <button onclick="resolveModeModal('Pickup')" class="w-full flex items-center justify-between p-4 rounded-xl border border-gray-200 hover:border-primary-rust hover:bg-orange-50 transition-all group">
-                    <span class="font-bold text-ink group-hover:text-primary-rust">Pickup</span>
-                    <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">shopping_bag</span>
-                </button>
-                <button onclick="resolveModeModal('Dine-in')" class="w-full flex items-center justify-between p-4 rounded-xl border border-gray-200 hover:border-primary-rust hover:bg-orange-50 transition-all group">
-                    <span class="font-bold text-ink group-hover:text-primary-rust">Dine-in</span>
-                    <span class="material-symbols-outlined text-gray-400 group-hover:text-primary-rust">restaurant</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="filter-panel" class="fixed inset-0 z-[100] bg-black/50 hidden flex justify-center items-end md:items-center backdrop-blur-sm animate-fade">
-        <div class="bg-white w-full max-w-md md:rounded-2xl rounded-t-3xl shadow-2xl flex flex-col max-h-[85vh] animate-slideUp">
-            <div class="flex items-center justify-between p-6 border-b border-gray-100">
-                <h3 class="text-xl font-bold text-ink font-heading">Filters</h3>
-                <button onclick="toggleFilterPanel()" class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-500 hover:bg-gray-200 transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">close</span>
-                </button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto space-y-8">
-                <div>
-                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Preference</h4>
-                    <div class="flex gap-3">
-                        <label class="flex items-center gap-3 cursor-pointer group w-full p-4 border border-gray-200 rounded-xl hover:border-green-600 transition-colors bg-gray-50/50">
-                            <input type="checkbox" id="filter-veg" class="peer hidden" onchange="updateFilterState('veg', this.checked)">
-                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full peer-checked:bg-green-600 peer-checked:border-green-600 flex items-center justify-center transition-all bg-white">
-                                <span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100">check</span>
-                            </div>
-                            <span class="text-base font-bold text-ink group-hover:text-green-600 transition-colors">Veg Only</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Price Range</h4>
-                    <div class="flex flex-wrap gap-3">
-                         <button onclick="updateFilterState('price', 'all')" id="price-all" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">Any</button>
-                         <button onclick="updateFilterState('price', 'low')" id="price-low" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">< ₹100</button>
-                         <button onclick="updateFilterState('price', 'mid')" id="price-mid" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">₹100+</button>
-                         <button onclick="updateFilterState('price', 'high')" id="price-high" class="price-btn px-5 py-2.5 rounded-full border border-gray-200 text-sm font-bold hover:border-primary-rust hover:text-primary-rust transition-all flex-1">₹300+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-6 border-t border-gray-100 flex gap-4 bg-white md:rounded-b-2xl">
-                <button onclick="clearFilters()" class="flex-1 py-3.5 rounded-xl border border-gray-200 text-ink font-bold hover:bg-gray-50 transition-all">Clear</button>
-                <button onclick="applyFilters()" class="flex-[2] py-3.5 rounded-xl bg-primary-rust text-white font-bold hover:bg-primary-dark shadow-lg shadow-orange-500/20 transition-all">Show Results</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="toast-container"
-        class="fixed bottom-32 left-1/2 -translate-x-1/2 z-[80] flex flex-col items-center gap-2 pointer-events-none">
-    </div>
-
-    <script>
-        /**
-         * ZWIGATO - Client Side Logic
-         */
-
-        // --- 1. DATA: The Menu ---
-        const MENU_ITEMS = [
-            {
-                id: "roll-veg-kabab",
-                name: "Veg Kabab Paratha Roll",
-                category: "rolls",
-                price: 30,
-                description: "The classic starter. Soft paratha wrapped around spiced veg kababs.",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBu4XtsPQVQmzt-oply8j5oOkLj49rQG2-Cd5sczoIoNTc099N2jy-G0avyqsFxa4oBx39r79JppJNpVccRit4LN8fO7YQCZnyU-tBxq4qxhRjjTBpRO_-ht-uEUNTanAikYyK1gX2bwVsHyEZoqwDqt3GIOPXgQdqr2fchUMIsFN9bHTdpDO5TWwSTwQhKUb2TUgNDt1QTeR8llO5TTr9XROLj2q_B5YYOQozYQBD8Vh_i24B2PLpIo2vIAHowK5BtsIP4oFdgv90",
-                isVeg: true,
-                tag: "Hook"
-            },
-            {
-                id: "roll-veg-paneer",
-                name: "Veg Paneer Kabab Roll",
-                category: "rolls",
-                price: 40,
-                description: "Upgrade to royalty. Soft paneer chunks with our signature spices.",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCTjXzJ_gtW9p5za_LWerjrpAIizMBfPlDFqAgODSuwB3PaMlAmTG1LUcWGMVWD-gEJl6WmYln0GAdtDRbxuLa8swxeUDeVjwBb5M4StIuy8YBZB4kUZ8F3EWDZTTgjD9DLfwI2f17F_31_Xcwepa0qEdp4pi8rt0ViHpd34yV03QLfIQzXAMPAZsGBOGN_wK3sMWNUwQR2vPl_OgeF1AcXI9uKhW44MgB3SjdoPuxln-OHocFqAD8EHz2rpcLWSKgq6dzxmd0FvvM",
-                isVeg: true,
-                tag: "Bestseller"
-            },
-            {
-                id: "kebab-galouti",
-                name: "Galouti Kebab (4 pcs)",
-                category: "kebabs",
-                price: 320,
-                description: "Melt-in-mouth kebabs prepared with 150+ secret spices. The pride of Lucknow.",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBiEJd-nNkflydn5dWe2apbwEymsC7rdQ6Na4dNwBSDpat12CGtLFsje0TmgRCMKb2nwWXZzj9e3DPiiU-LU9a5tlReR3GsLPEKvN1lMrLwXpCOpQT-o2h6hqBP0xbDJ3snj6Q6g7dbLXo9wOpQjJmHzAjaeGbNcvyzmzz_D6vNPCXjbKne7G_CG0vXu9MFlEGTYP6RYWTjrEFhNmzmaIDXpnXOYCYM20VNTMZqmnEXKlnKrnpq6oSJWSf0bZITCxUGKLyIi7S7x9E",
-                isVeg: false,
-                tag: "Signature"
-            },
-            {
-                id: "biryani-half",
-                name: "Awadhi Chicken Biryani (Half)",
-                category: "biryani",
-                price: 60,
-                description: "Long grain basmati rice cooked with succulent chicken and saffron.",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE",
-                isVeg: false,
-                tag: "Must Try"
-            },
-            {
-                id: "biryani-full",
-                name: "Awadhi Chicken Biryani (Full)",
-                category: "biryani",
-                price: 110,
-                description: "The complete feast. More pieces, more rice, more happiness.",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBFx9CZxnWoIJusoPUZgYvjy8IFo6YxqIKMv0fDByrfYXbhjeOdQNi3DJkzGvgPvTV_BFag-NceOGNLa6BsfIdqCoZCOCqkuIl84BJJsDC5S_Pc4DnPl_XTB8yfpAyThMGVG7YU1ubP2GnRO5I6Ijax0pWDFjQn_2vz0PVNiB-kDuNVRvRiMR431QeFHWSTsgAG88LuRxWuTGA9EMgf3YypQTGtQx4j89RCkhSWOFVofuvUdNjYcuC00Eawb1r3csic7VfHBvPy5OE",
-                isVeg: false,
-            },
-            {
-                id: "nihari",
-                name: "Nihari Gosht",
-                category: "curries",
-                price: 420,
-                description: "Slow-cooked stew of meat shank and marrow bones.",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-PMlITwONbLvoS9QvDpZDWkfReM6NyY3BJwB-N8V7GmMH07l7nR5kWnM1PCsBQNyHEfkI6VLyI2PxQlkWgVDPZbWEPg0r8TbZIr0BMGHQ9SvG77SWFL-8MbqycHRjNjTnk2OjKHdr939RrlX84_FRMQ3eBSPS7DZYorbMwSpwXcOBvI5ocLPIyuBcfCGp577ThS8we2jaue4iDG9IP3BfGQgtM3ioXzUZoNSjSd4RWgtCAog7hT59_jHQWWF_oz5R2TAfVvi6w0c",
-                isVeg: false,
-            },
-            {
-                id: "dessert-shahi",
-                name: "Shahi Tukda",
-                category: "desserts",
-                price: 180,
-                description: "Bread pudding dessert of fried bread slices soaked in hot milk with spices.",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD4JtH1VdyHqTowcQPBewPtHmnFJhsS6uXEUwIs6lDj6fLXl4NdwMOTqgpTxIiysk5eKnVO0ohjXPHO1wTGz-ZaINTgX-dr4Wis2ZTIfGJY7KJNCD7OaRN70RJJdFkeoVWgG3ZYoE4zxYUNdE38fh8-a7n9gPFjmLioLVw-v7-Q85qeJT_LHQkqklbMQqfs9tYlcONPcTWwvvIosMQI8IpQ0qTZCUrT4ipQWhnKUU0ggb5za4KlDK-GDMlM9HqpWHez_BBwP8Z_8-8",
-                isVeg: true,
-                tag: "Sweet Ending"
-            }
-        ];
-
-        // --- 2. PHRASES ---
-        const NAWABI_PHRASES = {
-            add: ["Wah! Lazeez choice hai Janab!", "Behtareen peshkash!", "Shauk farmayein!"],
-            remove: ["Koi baat nahi, kuch aur try karein?", "Dil chota na karein Janab."]
-        };
-
-        // --- 3. STATE ---
-        let cart = {}; 
-        let currentCategory = 'all';
-        let searchQuery = '';
-        let activeFilters = { veg: false, price: 'all' };
-        let tempFilters = { ...activeFilters };
-        let currentOrderMode = 'Delivery';
-        let hasExplicitlySelectedMode = false;
-        let detailedCart = {};
-
-        // --- 4. DOM ELEMENTS ---
-        const menuContainer = document.getElementById('menu-grid');
-        const cartBar = document.getElementById('cart-bar');
-        const cartCount = document.getElementById('cart-count');
-        const cartTotal = document.getElementById('cart-total');
-        const toastContainer = document.getElementById('toast-container');
-        const categoryButtons = document.querySelectorAll('.category-btn');
-
-        // Overlays
-        const viewHome = document.getElementById('view-home');
-        const viewCart = document.getElementById('view-cart');
-        const viewCheckout = document.getElementById('view-checkout');
-        const filterPanel = document.getElementById('filter-panel');
-
-        // Cart View Elements
-        const cartItemsContainer = document.getElementById('cart-items-container');
-        const cartViewSubtotal = document.getElementById('cart-view-subtotal');
-        const cartViewTotal = document.getElementById('cart-view-total');
-        const cartFooterTotal = document.getElementById('cart-footer-total');
-
-        // Checkout View Elements
-        const checkoutSubtotal = document.getElementById('checkout-subtotal');
-        const checkoutTotal = document.getElementById('checkout-total');
-        const inputName = document.getElementById('input-name');
-        const inputPhone = document.getElementById('input-phone');
-        const inputAddress = document.getElementById('input-address');
-        const orderNotes = document.getElementById('order-notes');
-        
-        // New Modal Elements
-        const modeModal = document.getElementById('mode-modal');
-        const modeModalContent = document.getElementById('mode-modal-content');
-
-        // --- 5. INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderMenu();
-            updateCartUI();
-            setupCategoryFilters();
-            updateModeSelectorUI();
-            syncFilterUI();
-            setupHeaderScroll();
+</div>
+</div>
+<button class="sm:hidden bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-2xl shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 transform active:scale-95 transition-all duration-200">
+<span class="text-sm">Checkout</span>
+<span class="material-symbols-outlined text-[18px] font-bold">arrow_forward</span>
+</button>
+</div>
+<button class="hidden sm:flex bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-8 rounded-2xl shadow-lg shadow-orange-500/20 items-center gap-2 transform active:scale-95 transition-all duration-200 hover:-translate-y-0.5">
+<span class="text-base">Checkout</span>
+<span class="material-symbols-outlined text-[20px] font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-orange-100/40 dark:bg-orange-900/10 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-green-100/40 dark:bg-green-900/10 rounded-full blur-[100px]"></div>
+</div>
+<script>
+    function toggleDropdown(button) {
+        const group = button.closest('.dropdown-group');
+        const itemCard = button.closest('.item-card');
+        const sectionGroup = button.closest('.section-group');
+        // Check if currently active
+        const isActive = group.classList.contains('active');
+        // Close all other active dropdowns first and reset z-indices
+        document.querySelectorAll('.dropdown-group.active').forEach(activeGroup => {
+            activeGroup.classList.remove('active');
+            const parentCard = activeGroup.closest('.item-card');
+            if(parentCard) parentCard.classList.remove('z-active');
+            const parentSection = activeGroup.closest('.section-group');
+            if(parentSection) parentSection.classList.remove('z-priority');
         });
-
-        // --- 6. CORE FUNCTIONS ---
-
-        // NEW: Scroll Glass Effect
-        function setupHeaderScroll() {
-            const header = document.getElementById('main-header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 10) {
-                    header.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-gray-100/50');
-                    header.classList.remove('bg-[#FFF0EB]', 'border-transparent');
+        // Toggle current
+        if (!isActive) {
+            group.classList.add('active');
+            if(itemCard) itemCard.classList.add('z-active');
+            // Add high z-index to the parent section so it sits above the next section
+            if(sectionGroup) sectionGroup.classList.add('z-priority');
+        } else {
+            group.classList.remove('active');
+            if(itemCard) itemCard.classList.remove('z-active');
+            if(sectionGroup) sectionGroup.classList.remove('z-priority');
+        }
+    }
+    // Helper data for styling based on mode
+    const modeConfig = {
+        'delivery': {
+            label: 'Delivery',
+            icon: 'two_wheeler',
+            containerId: 'section-delivery',
+            activeClass: 'bg-orange-50 dark:bg-orange-900/20 text-[#FF5200] font-bold',
+            defaultClass: 'hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium'
+        },
+        'pickup': {
+            label: 'Pickup',
+            icon: 'shopping_bag',
+            containerId: 'section-pickup',
+            activeClass: 'bg-orange-50 dark:bg-orange-900/20 text-[#FF5200] font-bold',
+            defaultClass: 'hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium'
+        },
+        'dinein': {
+            label: 'Dine-in',
+            icon: 'restaurant',
+            containerId: 'section-dinein',
+            activeClass: 'bg-orange-50 dark:bg-orange-900/20 text-[#FF5200] font-bold',
+            defaultClass: 'hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium'
+        }
+    };
+    function checkEmptySections() {
+        const sections = ['section-delivery', 'section-pickup', 'section-dinein'];
+        sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section) {
+                const itemsContainer = section.querySelector('.items-container');
+                // Check if items-container has any children
+                const itemCount = itemsContainer.children.length;
+                if (itemCount === 0) {
+                    // Hide the entire section including header
+                    section.classList.add('hidden');
                 } else {
-                    header.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-gray-100/50');
-                    header.classList.add('bg-[#FFF0EB]', 'border-transparent');
-                }
-            });
-        }
-
-        // NEW: Location Dropdown Logic
-        function toggleLocationDropdown(event) {
-            if(event) event.stopPropagation();
-            const dropdown = document.getElementById('location-dropdown');
-            const chevron = document.getElementById('location-chevron');
-            
-            if (dropdown.classList.contains('hidden')) {
-                dropdown.classList.remove('hidden');
-                dropdown.classList.add('animate-dropdown-enter');
-                chevron.classList.add('rotate-180');
-            } else {
-                dropdown.classList.add('hidden');
-                dropdown.classList.remove('animate-dropdown-enter');
-                chevron.classList.remove('rotate-180');
-            }
-        }
-
-        function updateLocation(newLocation) {
-            document.getElementById('current-location').innerText = newLocation;
-            document.getElementById('location-dropdown').classList.add('hidden');
-            document.getElementById('location-chevron').classList.remove('rotate-180');
-        }
-
-        function renderMenu() {
-            menuContainer.innerHTML = '';
-
-            let itemsToShow = currentCategory === 'all'
-                ? MENU_ITEMS
-                : MENU_ITEMS.filter(item => item.category === currentCategory);
-
-            if (searchQuery) {
-                const query = searchQuery.toLowerCase();
-                itemsToShow = itemsToShow.filter(item => 
-                    item.name.toLowerCase().includes(query) || 
-                    item.description.toLowerCase().includes(query) ||
-                    item.category.toLowerCase().includes(query)
-                );
-            }
-
-            if (activeFilters.veg) {
-                itemsToShow = itemsToShow.filter(item => item.isVeg);
-            }
-            if (activeFilters.price !== 'all') {
-                itemsToShow = itemsToShow.filter(item => {
-                    if (activeFilters.price === 'low') return item.price < 100;
-                    if (activeFilters.price === 'mid') return item.price >= 100 && item.price <= 300;
-                    if (activeFilters.price === 'high') return item.price > 300;
-                    return true;
-                });
-            }
-
-            const noResults = document.getElementById('no-results');
-            const searchCount = document.getElementById('search-count');
-            
-            if (itemsToShow.length === 0) {
-                noResults.classList.remove('hidden');
-                noResults.classList.add('flex');
-                if(searchQuery) searchCount.innerText = '';
-            } else {
-                noResults.classList.add('hidden');
-                noResults.classList.remove('flex');
-                if(searchQuery) {
-                    searchCount.classList.remove('hidden');
-                    searchCount.innerText = `Found ${itemsToShow.length} matches`;
-                } else {
-                    searchCount.classList.add('hidden');
+                    // Show it if it has items
+                    section.classList.remove('hidden');
                 }
             }
-
-            itemsToShow.forEach(item => {
-                const cartQty = cart[item.id] || 0;
-
-                const card = document.createElement('div');
-                // NEW CARD DESIGN: Clean, white, image on top, rounded corners (image_c699df.png style)
-                card.className = "bg-white rounded-2xl shadow-soft border border-transparent hover:border-gray-100 overflow-hidden group flex flex-col h-full";
-
-                card.innerHTML = `
-                    <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-50">
-                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
-                        ${item.tag ? `<div class="absolute top-2 left-2 bg-white/95 backdrop-blur px-2 py-0.5 rounded-[6px] text-[10px] font-bold shadow-sm uppercase tracking-wider text-primary-rust font-body">${item.tag}</div>` : ''}
-                        ${item.isVeg 
-                            ? `<div class="absolute bottom-2 right-2 bg-white/90 p-1 rounded-[4px] shadow-sm"><div class="border border-green-600 p-0.5 rounded-[2px] flex items-center justify-center w-3 h-3"><div class="w-1.5 h-1.5 bg-green-600 rounded-full"></div></div></div>` 
-                            : `<div class="absolute bottom-2 right-2 bg-white/90 p-1 rounded-[4px] shadow-sm"><div class="border border-primary-rust p-0.5 rounded-[2px] flex items-center justify-center w-3 h-3"><div class="w-1.5 h-1.5 bg-primary-rust rounded-full"></div></div></div>`
-                        }
-                    </div>
-                    
-                    <div class="p-3 flex flex-col flex-grow">
-                        <h3 class="font-bold text-[15px] text-ink leading-tight mb-1 line-clamp-2 font-heading">${item.name}</h3>
-                        <p class="text-[11px] text-gray-400 mb-3 line-clamp-2 font-body leading-relaxed">${item.description}</p>
-                        
-                        <div class="mt-auto flex items-center justify-between">
-                            <span class="font-bold text-[16px] text-ink font-heading">₹${item.price}</span>
-                            
-                            ${cartQty === 0 ? `
-                                <button onclick="addToCart('${item.id}')" class="h-8 px-5 bg-white border border-gray-200 text-primary-rust text-xs font-bold rounded-lg hover:border-primary-rust hover:bg-[#FFF6F3] transition-all shadow-sm uppercase tracking-wide">
-                                    ADD
-                                </button>
-                            ` : `
-                                <div class="flex items-center h-8 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-                                    <button onclick="updateQuantity('${item.id}', -1)" class="w-8 h-full flex items-center justify-center text-earth hover:bg-gray-50 font-bold">-</button>
-                                    <span class="w-6 text-center text-xs font-bold text-primary-rust">${cartQty}</span>
-                                    <button onclick="updateQuantity('${item.id}', 1)" class="w-8 h-full flex items-center justify-center text-primary-rust hover:bg-gray-50 font-bold">+</button>
-                                </div>
-                            `}
-                        </div>
-                    </div>
-                `;
-                menuContainer.appendChild(card);
+        });
+    }
+    function moveItem(optionButton, targetMode) {
+        // 1. Find the parent item card and dropdown group
+        const itemCard = optionButton.closest('.item-card');
+        const dropdownGroup = optionButton.closest('.dropdown-group');
+        const oldSection = itemCard.closest('.section-group');
+        // 2. Close the dropdown immediately
+        dropdownGroup.classList.remove('active');
+        itemCard.classList.remove('z-active');
+        if(oldSection) oldSection.classList.remove('z-priority');
+        // 3. Update Trigger Button UI (Icon and Label)
+        const triggerBtn = dropdownGroup.querySelector('.trigger-btn');
+        const iconDisplay = triggerBtn.querySelector('.icon-display');
+        const labelDisplay = triggerBtn.querySelector('.label-display');
+        iconDisplay.textContent = modeConfig[targetMode].icon;
+        labelDisplay.textContent = modeConfig[targetMode].label;
+        // 4. Update Dropdown Options Styling (Active State)
+        const allOptions = dropdownGroup.querySelectorAll('button:not(.trigger-btn)');
+        allOptions.forEach(btn => {
+            // Remove active styles, add default styles
+            btn.className = `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors text-left font-inter ${modeConfig[targetMode].defaultClass}`;
+            // Check if this button corresponds to the target mode we just selected
+            if(btn.textContent.trim().toLowerCase().includes(targetMode)) {
+                 btn.className = `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors text-left font-inter ${modeConfig[targetMode].activeClass}`;
+            }
+        });
+        // 5. Move the Item Card to the Target Section
+        const targetContainer = document.querySelector(`#${modeConfig[targetMode].containerId} .items-container`);
+        if (targetContainer && itemCard) {
+            // Append moves the node, effectively removing it from old parent
+            targetContainer.appendChild(itemCard);
+        }
+        // 6. Re-evaluate empty sections
+        checkEmptySections();
+    }
+    function updateQuantity(btn, change) {
+        const quantitySpan = btn.parentElement.querySelector('.quantity-display');
+        let currentQty = parseInt(quantitySpan.textContent);
+        let newQty = currentQty + change;
+        if (newQty < 1) newQty = 1; // Prevent negative or zero
+        quantitySpan.textContent = newQty;
+    }
+    // Add click outside listener to close dropdowns
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.dropdown-group')) {
+            document.querySelectorAll('.dropdown-group.active').forEach(group => {
+                group.classList.remove('active');
+                const parentCard = group.closest('.item-card');
+                if(parentCard) parentCard.classList.remove('z-active');
+                const parentSection = group.closest('.section-group');
+                if(parentSection) parentSection.classList.remove('z-priority');
             });
         }
-        
-        function handleSearch(query) {
-            searchQuery = query.trim();
-            // Sync all inputs
-            const heroInput = document.getElementById('search-input-hero');
-            const desktopInput = document.getElementById('search-input-desktop');
-            const mobileInput = document.getElementById('search-input-mobile');
-
-            if(heroInput && heroInput.value !== searchQuery) heroInput.value = searchQuery;
-            if(desktopInput) desktopInput.value = searchQuery;
-            if(mobileInput) mobileInput.value = searchQuery;
-            
-            if(searchQuery) {
-                document.getElementById('category-nav').scrollIntoView({behavior: 'smooth'});
-            }
-            renderMenu();
-        }
-
-        function clearSearch() {
-            handleSearch('');
-        }
-
-        // Filter Logic
-        function toggleFilterPanel() {
-            if (filterPanel.classList.contains('hidden')) {
-                filterPanel.classList.remove('hidden');
-                tempFilters = { ...activeFilters };
-                syncFilterUI();
-            } else {
-                filterPanel.classList.add('hidden');
-            }
-        }
-
-        function updateFilterState(type, value) {
-            tempFilters[type] = value;
-            syncFilterUI();
-        }
-
-        function syncFilterUI() {
-            document.getElementById('filter-veg').checked = tempFilters.veg;
-            
-            document.querySelectorAll('.price-btn').forEach(btn => {
-                btn.classList.remove('bg-primary-rust', 'text-white', 'border-primary-rust');
-                btn.classList.add('bg-white', 'border-gray-200', 'text-ink');
-                
-                if (btn.id === `price-${tempFilters.price}`) {
-                    btn.classList.remove('bg-white', 'border-gray-200', 'text-ink');
-                    btn.classList.add('bg-primary-rust', 'text-white', 'border-primary-rust');
-                }
-            });
-        }
-
-        function applyFilters() {
-            activeFilters = { ...tempFilters };
-            toggleFilterPanel();
-            renderMenu();
-            updateFilterIndicators();
-        }
-
-        function clearFilters() {
-            tempFilters = { veg: false, price: 'all' };
-            applyFilters();
-        }
-
-        function updateFilterIndicators() {
-            const hasFilters = activeFilters.veg || activeFilters.price !== 'all';
-            const desktopDot = document.getElementById('filter-dot-desktop');
-            
-            if (hasFilters) {
-                desktopDot.classList.remove('hidden');
-            } else {
-                desktopDot.classList.add('hidden');
-            }
-        }
-        
-        // Mode Logic
-        function setGlobalOrderMode(mode) {
-            currentOrderMode = mode;
-            hasExplicitlySelectedMode = true;
-            updateModeSelectorUI();
-            toggleModeDropdown();
-        }
-
-        const modeConfig = {
-            'Delivery': { icon: 'two_wheeler' },
-            'Pickup': { icon: 'shopping_bag' },
-            'Dine-in': { icon: 'restaurant' }
-        };
-
-        function updateModeSelectorUI() {
-            const label = document.getElementById('trigger-label');
-            const icon = document.getElementById('trigger-icon');
-            
-            if(label && icon) {
-                label.innerText = currentOrderMode;
-                icon.innerText = modeConfig[currentOrderMode].icon;
-            }
-
-            const buttons = document.querySelectorAll('#mode-dropdown button');
-            buttons.forEach(btn => {
-                const modeName = btn.querySelector('.text-sm').innerText;
-                const iconSpan = btn.querySelector('.material-symbols-outlined');
-                const textSpan = btn.querySelector('.text-sm');
-                
-                if (modeName === currentOrderMode) {
-                    btn.classList.add('bg-orange-50');
-                    iconSpan.classList.replace('text-gray-400', 'text-primary-rust');
-                    textSpan.classList.replace('text-ink', 'text-primary-rust');
-                } else {
-                    btn.classList.remove('bg-orange-50');
-                    iconSpan.classList.replace('text-primary-rust', 'text-gray-400');
-                    textSpan.classList.replace('text-primary-rust', 'text-ink');
-                }
-            });
-        }
-
-        function toggleModeDropdown(event) {
-            if(event) event.stopPropagation();
-            const dropdown = document.getElementById('mode-dropdown');
-            const chevron = document.getElementById('trigger-chevron');
-            
-            if (dropdown.classList.contains('hidden')) {
-                dropdown.classList.remove('hidden');
-                dropdown.classList.add('animate-dropdown-enter');
-                chevron.classList.add('rotate-180');
-            } else {
-                dropdown.classList.add('hidden');
-                dropdown.classList.remove('animate-dropdown-enter');
-                chevron.classList.remove('rotate-180');
-            }
-        }
-
-        function handleBodyClick(event) {
-            const dropdown = document.getElementById('mode-dropdown');
-            const trigger = document.getElementById('mode-trigger');
-            
-            if (dropdown && !dropdown.classList.contains('hidden') && !trigger.contains(event.target) && !dropdown.contains(event.target)) {
-                 dropdown.classList.add('hidden');
-                 document.getElementById('trigger-chevron').classList.remove('rotate-180');
-            }
-
-            // Close Location Dropdown
-            const locDropdown = document.getElementById('location-dropdown');
-            const locTrigger = document.getElementById('location-trigger');
-            if (locDropdown && !locDropdown.classList.contains('hidden') && !locTrigger.contains(event.target) && !locDropdown.contains(event.target)) {
-                 locDropdown.classList.add('hidden');
-                 document.getElementById('location-chevron').classList.remove('rotate-180');
-            }
-        }
-
-        let pendingItemId = null;
-        
-        function showModeModal() {
-            modeModal.classList.remove('hidden');
-            setTimeout(() => {
-                modeModalContent.classList.remove('scale-95');
-                modeModalContent.classList.add('scale-100');
-            }, 10);
-        }
-
-        function resolveModeModal(mode) {
-            setGlobalOrderMode(mode);
-            modeModal.classList.add('hidden');
-            if (pendingItemId) {
-                addToCart(pendingItemId, true);
-                pendingItemId = null;
-            }
-        }
-
-        function addToCart(itemId, silence = false) {
-            const isFirstAdd = Object.keys(cart).length === 0;
-            if (isFirstAdd && !hasExplicitlySelectedMode) {
-                pendingItemId = itemId;
-                showModeModal();
-                return;
-            }
-
-            if (!cart[itemId]) cart[itemId] = 0;
-            cart[itemId]++;
-
-            if (!detailedCart[itemId]) detailedCart[itemId] = {};
-            if (!detailedCart[itemId][currentOrderMode]) detailedCart[itemId][currentOrderMode] = 0;
-            
-            detailedCart[itemId][currentOrderMode]++;
-
-            if (!silence) speak(NAWABI_PHRASES.add);
-
-            updateCartUI();
-            renderMenu();
-        }
-
-        function updateQuantity(itemId, change) {
-            if (!cart[itemId]) return;
-
-            if (change > 0) {
-                if (!detailedCart[itemId]) detailedCart[itemId] = {};
-                if (!detailedCart[itemId][currentOrderMode]) detailedCart[itemId][currentOrderMode] = 0;
-                detailedCart[itemId][currentOrderMode]++;
-                cart[itemId]++;
-            } else {
-                if (detailedCart[itemId] && detailedCart[itemId][currentOrderMode] > 0) {
-                    detailedCart[itemId][currentOrderMode]--;
-                    cart[itemId]--;
-                } else {
-                    const modes = Object.keys(detailedCart[itemId]);
-                    for (let m of modes) {
-                        if (detailedCart[itemId][m] > 0) {
-                            detailedCart[itemId][m]--;
-                            cart[itemId]--;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (cart[itemId] <= 0) {
-                delete cart[itemId];
-                delete detailedCart[itemId];
-                speak(NAWABI_PHRASES.remove);
-            }
-
-            updateCartUI();
-            renderMenu();
-            renderCartList();
-        }
-
-        function updateCartModeQuantity(itemId, mode, change) {
-            if (!detailedCart[itemId]) detailedCart[itemId] = {};
-            if (!detailedCart[itemId][mode]) detailedCart[itemId][mode] = 0;
-
-            detailedCart[itemId][mode] += change;
-            cart[itemId] += change;
-
-            if (detailedCart[itemId][mode] <= 0) {
-                delete detailedCart[itemId][mode];
-            }
-            if (cart[itemId] <= 0) {
-                delete cart[itemId];
-                delete detailedCart[itemId];
-            }
-
-            updateCartUI();
-            renderMenu();
-            renderCartList();
-        }
-
-        function moveItemMode(itemId, oldMode, newMode) {
-            if (oldMode === newMode) return;
-            
-            if (detailedCart[itemId] && detailedCart[itemId][oldMode] > 0) {
-                 detailedCart[itemId][oldMode]--;
-                 
-                 if (!detailedCart[itemId][newMode]) detailedCart[itemId][newMode] = 0;
-                 detailedCart[itemId][newMode]++;
-                 
-                 if (detailedCart[itemId][oldMode] <= 0) delete detailedCart[itemId][oldMode];
-            }
-            
-            updateCartUI();
-            renderCartList();
-        }
-
-        function updateCartUI() {
-            const totalQty = Object.values(cart).reduce((a, b) => a + b, 0);
-            const totalPrice = Object.entries(cart).reduce((sum, [id, qty]) => {
-                const item = MENU_ITEMS.find(i => i.id === id);
-                return sum + (item.price * qty);
-            }, 0);
-
-            if (totalQty > 0) {
-                cartBar.classList.remove('translate-y-[200%]');
-                cartCount.innerText = `${totalQty} ITEM${totalQty > 1 ? 'S' : ''}`;
-                cartTotal.innerText = `\u20B9${totalPrice}`;
-            } else {
-                cartBar.classList.add('translate-y-[200%]');
-            }
-
-            const formattedTotal = `\u20B9${totalPrice}`;
-            cartViewSubtotal.innerText = formattedTotal;
-            cartViewTotal.innerText = formattedTotal;
-            cartFooterTotal.innerText = formattedTotal;
-            checkoutSubtotal.innerText = formattedTotal;
-            checkoutTotal.innerText = formattedTotal;
-        }
-
-        function showCart() {
-            renderCartList();
-            viewCart.classList.remove('hidden');
-            viewCheckout.classList.add('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function showCheckout() {
-            const totalQty = Object.values(cart).reduce((a, b) => a + b, 0);
-            if (totalQty === 0) {
-                showToast("Cart is empty Janab!");
-                return;
-            }
-            viewCheckout.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function goHome() {
-            viewCart.classList.add('hidden');
-            viewCheckout.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        function renderCartList() {
-            cartItemsContainer.innerHTML = '';
-
-            if (Object.keys(cart).length === 0) {
-                cartItemsContainer.innerHTML = `<div class="text-center py-10 text-earth opacity-50 font-bold font-body">Your cart is empty...</div>`;
-                return;
-            }
-
-            const modes = ['Delivery', 'Pickup', 'Dine-in'];
-            
-            modes.forEach(mode => {
-                let itemsInMode = [];
-                Object.keys(detailedCart).forEach(itemId => {
-                    if (detailedCart[itemId][mode] > 0) {
-                        itemsInMode.push({ id: itemId, qty: detailedCart[itemId][mode] });
-                    }
-                });
-
-                if (itemsInMode.length > 0) {
-                    const header = document.createElement('div');
-                    header.className = "flex items-center gap-2 mb-2 mt-2";
-                    header.innerHTML = `
-                        <span class="px-2 py-1 bg-gray-100 rounded text-xs font-bold text-gray-500 uppercase tracking-wider">${mode} Order</span>
-                        <div class="h-px bg-gray-100 flex-1"></div>
-                    `;
-                    cartItemsContainer.appendChild(header);
-
-                    itemsInMode.forEach(({ id, qty }) => {
-                        const item = MENU_ITEMS.find(i => i.id === id);
-                        const el = document.createElement('div');
-                        el.className = "group relative bg-white rounded-2xl p-3 flex gap-4 shadow-sm border border-gray-100";
-                        
-                        const otherModes = modes.filter(m => m !== mode);
-                        let dropdownOptions = otherModes.map(m => 
-                            `<option value="${m}">Move to ${m}</option>`
-                        ).join('');
-
-                        el.innerHTML = `
-                            <div class="shrink-0 w-20 h-20 rounded-xl bg-gray-50 overflow-hidden relative shadow-inner">
-                                <img src="${item.image}" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1 flex flex-col justify-between py-0.5">
-                                <div>
-                                    <div class="flex items-start justify-between gap-2">
-                                        <div class="flex flex-col w-full">
-                                            <div class="flex items-center justify-between gap-1.5 mb-1 w-full">
-                                                <div class="flex items-center gap-1.5">
-                                                    <div class="border ${item.isVeg ? 'border-green-600' : 'border-primary-rust'} p-0.5 rounded-[3px] w-4 h-4 flex items-center justify-center">
-                                                        <div class="w-2 h-2 ${item.isVeg ? 'bg-green-600' : 'bg-primary-rust'} rounded-full"></div>
-                                                    </div>
-                                                    <h3 class="font-bold text-sm text-ink leading-tight line-clamp-2 font-heading">${item.name}</h3>
-                                                </div>
-                                                
-                                                <select onchange="moveItemMode('${id}', '${mode}', this.value)" class="text-[10px] bg-gray-50 border border-gray-200 rounded px-1 py-0.5 text-earth focus:outline-none">
-                                                    <option selected disabled>${mode}</option>
-                                                    ${dropdownOptions}
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-end mt-2">
-                                    <p class="font-bold text-base text-ink font-heading">₹${item.price}</p>
-                                    <div class="flex items-center bg-white rounded-lg border border-gray-200 h-7 shadow-sm overflow-hidden">
-                                        <button onclick="updateCartModeQuantity('${item.id}', '${mode}', -1)" class="w-8 h-full flex items-center justify-center text-earth hover:bg-gray-50 font-bold">-</button>
-                                        <span class="w-6 text-center text-xs font-bold text-primary-rust tabular-nums">${qty}</span>
-                                        <button onclick="updateCartModeQuantity('${item.id}', '${mode}', 1)" class="w-8 h-full flex items-center justify-center text-primary-rust hover:bg-gray-50 font-bold">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        cartItemsContainer.appendChild(el);
-                    });
-                }
-            });
-        }
-
-        function placeOrder() {
-            const name = inputName.value.trim();
-            const phone = inputPhone.value.trim();
-            const address = inputAddress.value.trim();
-            const notes = orderNotes.value.trim();
-
-            if (!name || !phone) {
-                showToast("Please enter Name & Phone number!");
-                return;
-            }
-
-            let message = `*New Order from ${name}*\n`;
-            message += `Phone: ${phone}\n`;
-            if (address) message += `Address: ${address}\n`;
-            message += `----------------\n`;
-
-            let total = 0;
-            const modes = ['Delivery', 'Pickup', 'Dine-in'];
-            
-            modes.forEach(mode => {
-                let hasItems = false;
-                let sectionTotal = 0;
-                let sectionMsg = `\n*--- ${mode} Items ---*\n`;
-                
-                Object.keys(detailedCart).forEach(id => {
-                    const qty = detailedCart[id][mode] || 0;
-                    if (qty > 0) {
-                        hasItems = true;
-                        const item = MENU_ITEMS.find(i => i.id === id);
-                        const itemTotal = item.price * qty;
-                        sectionTotal += itemTotal;
-                        total += itemTotal;
-                        sectionMsg += `${qty}x ${item.name} - \u20B9${itemTotal}\n`;
-                    }
-                });
-                
-                if (hasItems) {
-                    message += sectionMsg;
-                }
-            });
-
-            message += `----------------\n`;
-            message += `*Total Bill: \u20B9${total}*\n`;
-            if (notes) message += `Instructions: ${notes}\n`;
-
-            const encodedMsg = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/919876543210?text=${encodedMsg}`;
-
-            window.open(whatsappUrl, '_blank');
-        }
-
-        function setupCategoryFilters() {
-            categoryButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    categoryButtons.forEach(b => b.classList.remove('active-tab'));
-                    btn.classList.add('active-tab');
-                    currentCategory = btn.dataset.category;
-                    renderMenu();
-                });
-            });
-        }
-
-        function speak(phrasesArray) {
-            const phrase = phrasesArray[Math.floor(Math.random() * phrasesArray.length)];
-            showToast(phrase);
-        }
-
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = "transform transition-all duration-500 translate-y-10 opacity-0 bg-[#333333] text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-3 border border-gray-700 min-w-max z-[100]";
-            toast.innerHTML = `<span class="tracking-wide text-sm font-medium font-body">${message}</span>`;
-            toastContainer.appendChild(toast);
-            requestAnimationFrame(() => toast.classList.remove('translate-y-10', 'opacity-0'));
-            setTimeout(() => {
-                toast.classList.add('translate-y-10', 'opacity-0');
-                setTimeout(() => toast.remove(), 500);
-            }, 3000);
-        }
-    </script>
-</body>
-
-</html>
+    });
+    // Initialize styling for existing active items in dropdowns on load
+    document.addEventListener('DOMContentLoaded', () => {
+         checkEmptySections();
+    });
+</script>
+</body></html>
